@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { site } from '../config/site'
+import { images } from '../config/images'
 
 export default function Footer() {
   return (
@@ -8,6 +9,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div>
             <div className="footer-brand">
+              <img src={images.logo} alt="" className="footer-mark" />
               RibaFree <span style={{ color: 'var(--invest)' }}>Homes</span>
             </div>
             <p style={{ color: 'var(--muted)', fontSize: '0.9rem', maxWidth: '38ch' }}>

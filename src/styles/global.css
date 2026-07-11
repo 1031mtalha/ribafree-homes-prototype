@@ -167,6 +167,19 @@ h3 { font-size: 1.45rem; }
   font-size: 1.35rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-mark { height: 30px; width: auto; }
+
+.footer-mark {
+  height: 26px;
+  width: auto;
+  display: inline-block;
+  vertical-align: -4px;
+  margin-right: 10px;
 }
 
 .nav-logo span { color: var(--invest); }
@@ -801,6 +814,176 @@ h3 { font-size: 1.45rem; }
 .cta-band .lede { margin: 0 auto 2.2rem; }
 .cta-band .hero-actions { justify-content: center; }
 
+/* ---------- Texas project map (signature motion moment) ---------- */
+
+.tx-map-wrap {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.tx-map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tx-outline {
+  fill: var(--surface);
+  stroke: var(--line);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.tx-dot { cursor: pointer; outline: none; }
+
+.tx-core {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.tx-dot:hover .tx-core,
+.tx-dot:focus-visible .tx-core,
+.tx-dot.active .tx-core {
+  transform: scale(1.6);
+}
+
+.tx-dot:focus-visible .tx-core {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.tx-completed { fill: var(--invest); }
+
+.tx-in-progress {
+  fill: var(--bg);
+  stroke: var(--invest);
+  stroke-width: 2.5;
+}
+
+.tx-upcoming {
+  fill: transparent;
+  stroke: var(--invest);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+
+.tx-ring-pulse {
+  fill: none;
+  stroke: var(--invest);
+  stroke-width: 1.5;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: txPulse 2.2s ease-out infinite;
+}
+
+.tx-ring-static {
+  fill: none;
+  stroke: var(--invest);
+  stroke-width: 1;
+  opacity: 0.5;
+  transform: scale(1.8);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes txPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+.tx-card {
+  position: absolute;
+  z-index: 5;
+  width: 250px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  pointer-events: none;
+  animation: txCardIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tx-card.instant { animation: none; }
+
+@keyframes txCardIn {
+  from { opacity: 0; margin-top: 8px; }
+  to { opacity: 1; margin-top: 0; }
+}
+
+.tx-card h3 {
+  font-size: 1.15rem;
+  margin: 10px 0 2px;
+}
+
+.tx-card-loc {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.tx-card-stats {
+  display: grid;
+  gap: 5px;
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+}
+
+.tx-card-stats div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tx-card-stats dt {
+  color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tx-badge-completed { color: var(--invest); border-color: var(--invest); background: var(--invest-soft); }
+.tx-badge-in-progress { color: var(--invest); border-color: var(--invest); }
+.tx-badge-upcoming { color: var(--muted); }
+
+.tx-legend {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tx-legend span { display: inline-flex; align-items: center; gap: 8px; }
+
+.tx-key {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.tx-key-completed { background: var(--invest); }
+.tx-key-in-progress { border: 2px solid var(--invest); }
+.tx-key-upcoming { border: 1.5px dashed var(--invest); }
+
+@media (max-width: 640px) {
+  .tx-card {
+    left: 50% !important;
+    top: auto !important;
+    bottom: -10px;
+    transform: translate(-50%, 100%) !important;
+    width: min(320px, 88vw);
+  }
+}
+
 /* ---------- reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -820,6 +1003,10 @@ h3 { font-size: 1.45rem; }
 
   .btn:hover,
   .path-card:hover { transform: none; }
+
+  .tx-ring-pulse { animation: none; opacity: 0.5; transform: scale(1.8); }
+  .tx-card { animation: none; }
+  .tx-core { transition: none; }
 
   * { transition-duration: 0.01ms !important; }
 }

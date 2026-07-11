@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
+import { images } from '../config/images'
 
 const links = [
   { to: '/how-it-works', label: 'How It Works' },
@@ -24,6 +25,7 @@ export default function Nav() {
   return (
     <header className={`nav ${scrolled || open ? 'scrolled' : ''}`}>
       <Link to="/" className="nav-logo" onClick={() => setOpen(false)}>
+        <img src={images.logo} alt="" className="nav-mark" />
         RibaFree <span>Homes</span>
       </Link>
 

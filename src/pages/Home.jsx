@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { images } from '../config/images'
 import { steps } from '../config/content/steps'
 import Reveal from '../components/Reveal'
+import TexasMap from '../components/TexasMap'
 
 export default function Home() {
   return (
@@ -20,6 +21,32 @@ export default function Home() {
           <div className="hero-actions fade-up d3">
             <Link to="/investors" className="btn invest">I’m an investor</Link>
             <Link to="/buyers" className="btn buyer">I want to buy a home</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <div className="section-head" style={{ textAlign: 'center', margin: '0 auto 56px' }}>
+              <span className="eyebrow">Where we build</span>
+              <h2>Projects across North Texas</h2>
+              <p className="lede" style={{ margin: '1rem auto 0' }}>
+                Hover a location — or tap it — to see each project’s status
+                and figures.
+              </p>
+            </div>
+          </Reveal>
+          <TexasMap />
+          <div style={{ maxWidth: 720, margin: '28px auto 0' }}>
+            <div className="placeholder-flag">
+              <strong>Needs content from Atif</strong>
+              <span>
+                Map dots use community-level coordinates and sample
+                statuses/figures — exact geocodes, real statuses, and project
+                stats required before this is shown publicly.
+              </span>
+            </div>
           </div>
         </div>
       </section>

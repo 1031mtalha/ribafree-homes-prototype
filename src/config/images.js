@@ -6,6 +6,10 @@ const u = (id, w = 1600) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`
 
 export const images = {
+  // Brand mark — currently an SVG *recreation* of the real logo.
+  // Drop the real export at public/ribafree-logo.svg (or change this path).
+  logo: '/ribafree-logo.svg',
+
   // Home page
   heroHome: u('photo-1512917774080-9991f1c4c750'), // dusk exterior, pool
   pathInvestor: u('photo-1541888946425-d81bb19240f5', 900), // construction site

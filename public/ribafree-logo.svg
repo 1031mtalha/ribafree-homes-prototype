@@ -1,0 +1,11 @@
+<!-- PLACEHOLDER RECREATION of the RibaFree Homes mark (red/green/white peak).
+     Replace this file with the real logo export (same filename) and the
+     site updates everywhere — no code changes needed. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 84" fill="none">
+  <!-- white right slope / outline -->
+  <path d="M60 10 L106 78 H88 L60 36 Z" fill="#e9e4db"/>
+  <!-- red left letterform stroke -->
+  <path d="M14 78 L52 22 L60 34 L32 78 Z" fill="#c0392b"/>
+  <!-- green center letterform stroke -->
+  <path d="M40 78 L62 46 L70 58 L56 78 Z" fill="#2e9e44"/>
+</svg>
