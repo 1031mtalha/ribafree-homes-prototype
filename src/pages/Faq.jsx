@@ -1,9 +1,9 @@
 import { faqs } from '../config/content/faq'
 import PlaceholderFlag from '../components/PlaceholderFlag'
 
-// Every question gets its OWN answer (the live site returns one identical
-// answer for all 15). Answers we can't source are flagged, never faked.
-// FAQ content is trust-critical — intentionally no reveal animations here.
+// Every question gets its OWN answer. Answers we can't source are flagged,
+// never faked. FAQ content is trust-critical — intentionally no reveal
+// animations here.
 export default function Faq() {
   return (
     <>
@@ -12,8 +12,8 @@ export default function Faq() {
           <span className="eyebrow fade-up">FAQ</span>
           <h1 className="fade-up d1">Straight answers.</h1>
           <p className="lede fade-up d2">
-            Where we don’t yet have a verified answer, we say so — you’ll see
-            a flag instead of filler.
+            Everything you need to know about financing a home with
+            RibaFree.
           </p>
         </div>
       </section>

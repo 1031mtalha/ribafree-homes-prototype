@@ -1,83 +1,54 @@
-// FAQ — every question from the live site, each with its OWN answer.
-// (The live site returns one identical answer for all 15 questions,
-// including an unverified Shariah-certification claim. Fixed here.)
-//
-// answer: real copy derived from provided information only.
-// placeholder: true → renders a "Needs content from Atif" flag instead of
-// invented copy. NEVER fill these in without a real source.
+// FAQ — updated 2026-08-08 with confirmed content.
+// Previous placeholder/partial answers have been replaced with real,
+// confirmed copy. Keep this list as the single source of truth for /faq.
 
 export const faqs = [
   {
     q: 'What is RibaFree Homes?',
-    a: 'RibaFree Homes is a faith-aligned real estate company that helps buyers own homes without interest-based lending. Instead of a loan, RibaFree — backed by aligned investors — buys or builds the home, pays the builder cash up front, and resells it to the buyer at one fixed price paid over time (a murabaha, or cost-plus sale).',
+    a: 'A builder-financing program for single-family homes. We purchase the home, then sell it to a qualified buyer at a fixed price with no interest — paid off over 5 years after a 30% down payment.',
   },
   {
-    q: 'How is RibaFree Homes different from conventional home financing?',
-    a: 'A conventional mortgage is a loan of money repaid with compounding interest — the total you pay grows over time. RibaFree structures a sale, not a loan: the price is fixed at signing and never grows. There is no interest and no compounding; you simply pay the agreed price down in installments.',
+    q: 'How is this different from conventional financing?',
+    a: 'No interest, period. Instead of compounding interest, you pay a fixed cost-plus markup — meaning you pay market value and save what you’d otherwise lose to interest.',
   },
   {
-    q: 'Is there any down payment required?',
-    a: 'Yes. Buyers bring roughly 30% of the home cost as a down payment. RibaFree is designed for people who are financially close to owning — typically within $100k–$200k — rather than zero-down buyers.',
+    q: 'Is a down payment required?',
+    a: 'Yes — a minimum of 30% from the buyer. You’ll also need to provide 3 well-qualified references, and two of them may be asked to contribute 5% each.',
   },
   {
-    q: 'Who is eligible for RibaFree Homes financing?',
-    a: 'Buyers who can put down roughly 30% of the home cost and are close to affording a home outright — typically short by $100k–$200k. If you cannot make the ~30% down payment, this program honestly is not built for your situation yet. Full underwriting criteria are being finalized.',
+    q: 'Who is eligible?',
+    a: 'Anyone who meets our financial requirements, can provide the down payment, has 3 well-qualified references, and completes the required documentation.',
   },
   {
-    q: 'How do I apply for RibaFree Homes financing?',
-    a: 'Submit a buyer inquiry through the contact form on this site. The RibaFree team reviews your situation — savings, income stability, and target home — and walks you through the fixed-price agreement from there. Detailed application steps will be published as the program formalizes.',
+    q: 'How do I apply?',
+    a: 'Start with the application form on our website, or come into the office. Once we’ve reviewed it, a representative will reach out to walk through next steps. Note that we need to have already agreed to purchase the home before financing can move forward.',
   },
   {
-    q: 'What are the available financing options at RibaFree Homes?',
-    a: 'The core structure is a murabaha: a cost-plus sale where RibaFree buys or builds the home, then resells it to you at a fixed price paid in installments with no interest. Whether additional structures (e.g. for land or rehab purchases) are offered to buyers is pending confirmation.',
-    partial: true,
+    q: 'What financing options are available?',
+    a: 'Murabaha — our cost-plus, builder-financing model.',
   },
   {
-    q: 'Are the financing agreements in compliance with Islamic scholars?',
-    placeholder: true,
-    placeholderNote:
-      'Do not claim Shariah certification or scholarly audit without a real, verifiable source. The live site currently makes this claim unverified.',
-  },
-  {
-    q: 'Does RibaFree Homes cover all types of properties?',
-    placeholder: true,
-    placeholderNote:
-      'Investor projects span land acquisition, distressed rehab, and new construction — but buyer-side property coverage needs confirmation.',
+    q: 'What property types does RibaFree Homes finance?',
+    a: 'Right now, single-family homes only.',
   },
   {
     q: 'Are there any hidden fees or charges?',
-    placeholder: true,
-    placeholderNote: 'Fee schedule must come from Atif — cannot assert "no hidden fees" without confirmation.',
+    a: 'None. Every cost is laid out for you before you sign anything.',
   },
   {
     q: 'What happens if I miss a payment?',
-    placeholder: true,
-    placeholderNote: 'Late/missed payment policy must be defined by Atif — do not invent.',
+    a: 'We’ll work with you on a manageable payment plan — no interest, no penalty fees.',
   },
   {
-    q: 'Can non-Muslims apply for RibaFree Homes?',
-    placeholder: true,
-    placeholderNote: 'Likely yes, but needs an explicit answer from Atif.',
-  },
-  {
-    q: 'Can I transfer my conventional mortgage to RibaFree Homes?',
-    placeholder: true,
-    placeholderNote: 'Refinancing/transfer policy unknown — needs Atif.',
+    q: 'Can non-Muslims apply?',
+    a: 'Absolutely. Our services are open to everyone, regardless of religious background.',
   },
   {
     q: 'What is the maximum financing tenure?',
-    placeholder: true,
-    placeholderNote: 'Term length unknown — needs Atif.',
+    a: '5 years.',
   },
   {
-    q: 'How does RibaFree Homes make a profit if no interest is charged?',
-    placeholder: true,
-    placeholderNote:
-      'Needs Atif to confirm the profit mechanism — provided materials describe both "0% markup over cost" and a "cost-plus" resale, which conflict. Clarify before publishing.',
-  },
-  {
-    q: 'What documentation is required to apply for financing?',
-    placeholder: true,
-    placeholderNote: 'Document checklist needs Atif.',
+    q: 'How does RibaFree make a profit?',
+    a: 'We use a builder-financing model. RibaFree purchases the home as the builder, then sells it to you at a fixed, cost-plus price above the actual build cost. You pay market value with zero interest.',
   },
 ]
