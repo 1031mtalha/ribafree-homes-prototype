@@ -5,9 +5,9 @@ export const site = {
   name: 'RibaFree Homes',
   tagline: 'Faith-aligned homeownership, without interest.',
 
-  // Confirmed by Muhammad 2026-07-10: use info@ everywhere.
-  // (Live site inconsistently shows info@ and invest@ — invest@ intentionally unused.)
-  email: 'info@ribafreehomes.com',
+  // Corrected by Muhammad 2026-07-19: use invest@ everywhere (supersedes the
+  // 2026-07-10 info@ decision). Live site inconsistently shows both.
+  email: 'invest@ribafreehomes.com',
 
   phone: '[NEEDS CONTENT FROM ATIF]', // live site phone not confirmed
   address: '[NEEDS CONTENT FROM ATIF]',

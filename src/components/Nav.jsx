@@ -25,8 +25,7 @@ export default function Nav() {
   return (
     <header className={`nav ${scrolled || open ? 'scrolled' : ''}`}>
       <Link to="/" className="nav-logo" onClick={() => setOpen(false)}>
-        <img src={images.logo} alt="" className="nav-mark" />
-        RibaFree <span>Homes</span>
+        <img src={images.logo} alt="RibaFree Homes" className="nav-mark" />
       </Link>
 
       <button

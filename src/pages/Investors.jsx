@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../config/content/projects'
+import { heldProperties, lots, portfolioOpenQuestions } from '../config/content/portfolio'
 import ProjectCard from '../components/ProjectCard'
+import PropertyCard from '../components/PropertyCard'
+import LotCarousel from '../components/LotCarousel'
+import PlaceholderFlag from '../components/PlaceholderFlag'
 import Reveal from '../components/Reveal'
 
 export default function Investors() {
@@ -20,6 +24,59 @@ export default function Investors() {
       </section>
 
       <section className="section" style={{ paddingTop: 24 }}>
+        <div className="container">
+          <Reveal>
+            <div className="section-head">
+              <span className="eyebrow invest">Portfolio</span>
+              <h2>Held & prior properties</h2>
+              <p className="lede" style={{ marginTop: '1rem' }}>
+                Past investor-track deals — Atif buying, building, or
+                rehabbing with builders, then holding, renting, or selling.
+                These are not buyer-program (0%-markup) sales; no home has
+                been confirmed sold under that model yet.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid-3">
+            {heldProperties.map((p) => (
+              <PropertyCard key={p.id} property={p} />
+            ))}
+          </div>
+
+          <div style={{ marginTop: 56 }}>
+            <Reveal>
+              <div className="section-head" style={{ marginBottom: 28 }}>
+                <span className="eyebrow invest">Builder lots</span>
+                <h3>Floor plans & lots on file</h3>
+                <p style={{ color: 'var(--muted)', marginTop: '0.8rem' }}>
+                  Records from builder communities. Whether each was actually
+                  transacted by RibaFree, and current status, is unconfirmed —
+                  shown as-is, not guessed.
+                </p>
+              </div>
+            </Reveal>
+            <LotCarousel lots={lots} />
+          </div>
+
+          <div style={{ marginTop: 28 }}>
+            <PlaceholderFlag
+              note={
+                <span>
+                  Open questions before this portfolio can be finalized:
+                  <ul style={{ margin: '0.6rem 0 0 1.2rem' }}>
+                    {portfolioOpenQuestions.map((q) => (
+                      <li key={q} style={{ marginBottom: 4 }}>{q}</li>
+                    ))}
+                  </ul>
+                </span>
+              }
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
           <Reveal>
             <div className="section-head">
