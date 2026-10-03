@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../config/content/projects'
-import { heldProperties, lots, portfolioOpenQuestions } from '../config/content/portfolio'
+import { heldProperties, lots } from '../config/content/portfolio'
 import ProjectCard from '../components/ProjectCard'
 import PropertyCard from '../components/PropertyCard'
 import LotCarousel from '../components/LotCarousel'
-import PlaceholderFlag from '../components/PlaceholderFlag'
 import Reveal from '../components/Reveal'
 
 export default function Investors() {
@@ -58,21 +57,6 @@ export default function Investors() {
             </Reveal>
             <LotCarousel lots={lots} />
           </div>
-
-          <div style={{ marginTop: 28 }}>
-            <PlaceholderFlag
-              note={
-                <span>
-                  Open questions before this portfolio can be finalized:
-                  <ul style={{ margin: '0.6rem 0 0 1.2rem' }}>
-                    {portfolioOpenQuestions.map((q) => (
-                      <li key={q} style={{ marginBottom: 4 }}>{q}</li>
-                    ))}
-                  </ul>
-                </span>
-              }
-            />
-          </div>
         </div>
       </section>
 
@@ -97,16 +81,6 @@ export default function Investors() {
             ))}
           </div>
 
-          <div style={{ marginTop: 28 }}>
-            <div className="placeholder-flag">
-              <strong>Needs content from Atif</strong>
-              <span>
-                All project figures above are sample data for layout review —
-                real locations, costs, sizes, ROI projections, and deposit
-                amounts required before this page is shown to investors.
-              </span>
-            </div>
-          </div>
         </div>
       </section>
 

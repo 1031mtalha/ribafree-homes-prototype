@@ -1,9 +1,7 @@
 import { faqs } from '../config/content/faq'
-import PlaceholderFlag from '../components/PlaceholderFlag'
 
-// Every question gets its OWN answer. Answers we can't source are flagged,
-// never faked. FAQ content is trust-critical — intentionally no reveal
-// animations here.
+// Every question gets its OWN answer. FAQ content is trust-critical —
+// intentionally no reveal animations here.
 export default function Faq() {
   return (
     <>
@@ -24,18 +22,7 @@ export default function Faq() {
             <details className="faq-item" key={f.q}>
               <summary>{f.q}</summary>
               <div className="faq-answer">
-                {f.placeholder ? (
-                  <PlaceholderFlag note={f.placeholderNote} />
-                ) : (
-                  <>
-                    <p>{f.a}</p>
-                    {f.partial && (
-                      <div style={{ marginTop: 14 }}>
-                        <PlaceholderFlag note="Partial answer — remainder needs confirmation from Atif." />
-                      </div>
-                    )}
-                  </>
-                )}
+                <p>{f.a}</p>
               </div>
             </details>
           ))}

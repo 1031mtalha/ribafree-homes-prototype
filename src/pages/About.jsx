@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { images } from '../config/images'
 import Reveal from '../components/Reveal'
-import PlaceholderFlag from '../components/PlaceholderFlag'
 
 export default function About() {
   return (
@@ -50,18 +49,6 @@ export default function About() {
               </div>
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <div className="section-head">
-              <span className="eyebrow">The team</span>
-              <h2>Who’s behind RibaFree</h2>
-            </div>
-          </Reveal>
-          <PlaceholderFlag note="Founder story, team bios, company history, and any real credentials — pending from Atif. No claims invented here." />
         </div>
       </section>
 

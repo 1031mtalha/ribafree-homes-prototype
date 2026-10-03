@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { images } from '../config/images'
 import { steps, comparison } from '../config/content/steps'
 import Reveal from '../components/Reveal'
-import PlaceholderFlag from '../components/PlaceholderFlag'
 
 export default function HowItWorks() {
   return (
@@ -87,11 +86,7 @@ export default function HowItWorks() {
                   <tr key={row.label}>
                     <td className="label">{row.label}</td>
                     <td style={{ color: 'var(--muted)' }}>{row.conventional}</td>
-                    <td>
-                      {row.ribafree ?? (
-                        <PlaceholderFlag note="Missed-payment policy must be defined — not invented." />
-                      )}
-                    </td>
+                    <td>{row.ribafree ?? null}</td>
                   </tr>
                 ))}
               </tbody>

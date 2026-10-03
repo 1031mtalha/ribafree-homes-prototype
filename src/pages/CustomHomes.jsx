@@ -1,5 +1,3 @@
-import PlaceholderFlag from '../components/PlaceholderFlag'
-
 // Stub — the live site's "Custom Homes" nav link is broken and its intended
 // content was never defined. Kept visible so the gap is part of the review.
 export default function CustomHomes() {
@@ -13,7 +11,6 @@ export default function CustomHomes() {
           content exists for it. Rather than invent an offering, this stub
           holds the spot until it’s defined.
         </p>
-        <PlaceholderFlag note="What is the Custom Homes offering? Scope, process, and whether it belongs in the main nav — needs Atif." />
       </div>
     </section>
   )

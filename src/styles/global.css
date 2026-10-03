@@ -20,7 +20,7 @@
   --buyer: #5d7a63;         /* muted sage — buyer track */
   --buyer-soft: rgba(93, 122, 99, 0.12);
 
-  /* placeholder flag — same accent family, used sparingly */
+  /* sample-data badge — same accent family, used sparingly */
   --flag: var(--invest);
   --flag-soft: var(--invest-soft);
 
@@ -593,30 +593,6 @@ h3 { font-size: 1.45rem; }
   border-radius: 50%;
   background: var(--line-strong);
 }
-
-/* ---------- placeholder flag ---------- */
-
-.placeholder-flag {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 10px;
-  background: var(--flag-soft);
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius);
-  padding: 12px 16px;
-  color: var(--flag);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-}
-
-.placeholder-flag strong {
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.placeholder-flag span { color: var(--flag); opacity: 0.85; }
 
 /* ---------- FAQ ---------- */
 

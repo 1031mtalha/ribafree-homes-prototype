@@ -38,16 +38,6 @@ export default function Home() {
             </div>
           </Reveal>
           <TexasMap />
-          <div style={{ maxWidth: 720, margin: '28px auto 0' }}>
-            <div className="placeholder-flag">
-              <strong>Needs content from Atif</strong>
-              <span>
-                Map dots use community-level coordinates and sample
-                statuses/figures — exact geocodes, real statuses, and project
-                stats required before this is shown publicly.
-              </span>
-            </div>
-          </div>
         </div>
       </section>
 

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { images } from '../config/images'
 import Reveal from '../components/Reveal'
-import PlaceholderFlag from '../components/PlaceholderFlag'
 
 export default function Buyers() {
   return (
@@ -90,9 +89,6 @@ export default function Buyers() {
                     </div>
                   </li>
                 </ul>
-                <div style={{ marginTop: 20 }}>
-                  <PlaceholderFlag note="Review criteria, timelines, and installment schedule details need confirmation before this process is presented as final." />
-                </div>
               </div>
             </Reveal>
           </div>
