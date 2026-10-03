@@ -55,7 +55,7 @@ function Dot({ p, active, reducedMotion, onEnter, onLeave, onToggle }) {
       className={`tx-dot ${active ? 'active' : ''}`}
       role="button"
       tabIndex={0}
-      aria-label={`${p.name}, ${p.location} — ${status}`}
+      aria-label={`${p.name}, ${p.location}, ${status}`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onFocus={onEnter}

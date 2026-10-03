@@ -6,11 +6,16 @@
 
 export const projectStatuses = ['Planned', 'In Progress', 'Completed']
 
+// Type is a direct restatement of each sample project's own name/category —
+// not a new fact, just a structured field for filtering.
+export const projectTypes = ['New Build', 'Rehab', 'Land Acquisition']
+
 export const projects = [
   {
     id: 'project-a',
     sampleData: true,
-    name: 'Sample Project — Single Family New Build',
+    name: 'Sample Project: Single Family New Build',
+    type: 'New Build',
     location: '[City, State]',
     status: 'In Progress',
     landCost: '$—',
@@ -26,7 +31,8 @@ export const projects = [
   {
     id: 'project-b',
     sampleData: true,
-    name: 'Sample Project — Distressed Property Rehab',
+    name: 'Sample Project: Distressed Property Rehab',
+    type: 'Rehab',
     location: '[City, State]',
     status: 'Planned',
     landCost: '$—',
@@ -42,7 +48,8 @@ export const projects = [
   {
     id: 'project-c',
     sampleData: true,
-    name: 'Sample Project — Land Acquisition & Build',
+    name: 'Sample Project: Land Acquisition & Build',
+    type: 'Land Acquisition',
     location: '[City, State]',
     status: 'Completed',
     landCost: '$—',

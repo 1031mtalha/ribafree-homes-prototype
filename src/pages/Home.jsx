@@ -1,10 +1,48 @@
+/*
+THESIS: A working real-estate operator, not an editorial pitch deck — white
+operational shell, photographic trust, and a live functional search; refuses
+the warm-cream/serif "handwritten essay" look the prototype shipped with.
+OWN-WORLD: White ground, near-black text, two named track accents — signal
+red (investor) and forest green (buyer) — one geometric sans (Public Sans)
+throughout, 10/16px rounded controls, soft elevation shadows, a floating
+white search card bridging hero and content.
+STORY: A visitor sees a real Texas home, searches by location/status/type,
+and lands on real (or honestly sample-flagged) portfolio entries — trust
+built by function, not copy.
+FIRST VIEWPORT: Fixed white nav (logo, links, two CTA pills) above a
+full-bleed hero photo, headline/subhead upper-left, search card anchored at
+the hero's lower edge overlapping into the page below.
+FORM: Brief-pinned direction (user-supplied screenshot of ribafreehomes.com)
+— no concept tournament run; the reference is the committed world.
+*/
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { images } from '../config/images'
 import { steps } from '../config/content/steps'
+import { listings } from '../config/content/listings'
 import Reveal from '../components/Reveal'
 import TexasMap from '../components/TexasMap'
+import SearchBar from '../components/SearchBar'
+import ListingCard from '../components/ListingCard'
+
+const emptyFilters = { location: '', status: '', type: '' }
 
 export default function Home() {
+  const [filters, setFilters] = useState(emptyFilters)
+  const [applied, setApplied] = useState(null)
+
+  const results = useMemo(() => {
+    if (!applied) return null
+    return listings.filter(
+      (l) =>
+        (!applied.location || l.location === applied.location) &&
+        (!applied.status || l.status === applied.status) &&
+        (!applied.type || l.type === applied.type)
+    )
+  }, [applied])
+
+  const hasFilters = applied && (applied.location || applied.status || applied.type)
+
   return (
     <>
       <section className="hero" style={{ backgroundImage: `url(${images.heroHome})` }}>
@@ -14,9 +52,9 @@ export default function Home() {
             Own your home. Without&nbsp;interest.
           </h1>
           <p className="lede fade-up d2">
-            RibaFree Homes structures fixed-price home purchases — a murabaha,
-            not a loan. The builder is paid cash up front, your price is set at
-            signing, and it never grows.
+            RibaFree Homes structures fixed-price home purchases, a murabaha
+            rather than a loan. The builder is paid cash up front, your price
+            is set at signing, and it never grows.
           </p>
           <div className="hero-actions fade-up d3">
             <Link to="/investors" className="btn invest">I’m an investor</Link>
@@ -25,6 +63,48 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="hero-search-wrap">
+        <SearchBar value={filters} onChange={setFilters} onSubmit={() => setApplied(filters)} />
+      </div>
+
+      {results && (
+        <section className="section" style={{ paddingTop: 72 }}>
+          <div className="container">
+            <div className="search-results-head">
+              <div>
+                <span className="eyebrow">Search results</span>
+                <h2 style={{ fontSize: '1.6rem' }}>
+                  {results.length} {results.length === 1 ? 'match' : 'matches'}
+                  {hasFilters ? ' for your search' : ' across our portfolio'}
+                </h2>
+              </div>
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  setFilters(emptyFilters)
+                  setApplied(null)
+                }}
+              >
+                Clear search
+              </button>
+            </div>
+            {results.length ? (
+              <div className="grid-3">
+                {results.map((l) => (
+                  <ListingCard key={l.id} listing={l} />
+                ))}
+              </div>
+            ) : (
+              <p className="search-results-empty">
+                No matches on file yet for that combination. Try the full{' '}
+                <Link to="/investors">investor portfolio</Link>.
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
       <section className="section">
         <div className="container">
           <Reveal>
@@ -32,7 +112,7 @@ export default function Home() {
               <span className="eyebrow">Where we build</span>
               <h2>Projects across North Texas</h2>
               <p className="lede" style={{ margin: '1rem auto 0' }}>
-                Hover a location — or tap it — to see each project’s status
+                Hover a location, or tap it, to see each project’s status
                 and figures.
               </p>
             </div>
@@ -61,7 +141,7 @@ export default function Home() {
                   <h3>Put capital to work, without lending at interest</h3>
                   <p>
                     Fund land acquisition, distressed property rehab, and new
-                    construction. Earn returns from real projects — not
+                    construction. Earn returns from real projects, not
                     interest on debt.
                   </p>
                   <span className="btn invest">View projects</span>
@@ -97,7 +177,7 @@ export default function Home() {
               <span className="eyebrow">The mechanism</span>
               <h2>How a purchase works</h2>
               <p className="lede" style={{ marginTop: '1rem' }}>
-                A cost-plus sale — murabaha — in four steps. No interest, no
+                A cost-plus sale, or murabaha, in four steps. No interest, no
                 compounding, no surprises.
               </p>
             </div>
@@ -128,8 +208,8 @@ export default function Home() {
           <span className="eyebrow">Get started</span>
           <h2>Which one are you?</h2>
           <p className="lede">
-            Investor and buyer conversations are different — tell us which one
-            you’re starting.
+            Investor and buyer conversations are different, so tell us which
+            one you’re starting.
           </p>
           <div className="hero-actions">
             <Link to="/contact?track=investor" className="btn invest">Investor inquiry</Link>

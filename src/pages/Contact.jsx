@@ -15,8 +15,8 @@ export default function Contact() {
         <span className="eyebrow fade-up">Contact</span>
         <h1 className="fade-up d1">Start the conversation.</h1>
         <p className="lede fade-up d2" style={{ marginBottom: '3rem' }}>
-          Investor and buyer inquiries take different paths — pick yours. Both
-          reach {site.email}.
+          Investor and buyer inquiries take different paths, so pick yours.
+          Both reach {site.email}.
         </p>
 
         <div className="form-toggle fade-up d3">

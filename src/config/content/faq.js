@@ -5,15 +5,15 @@
 export const faqs = [
   {
     q: 'What is RibaFree Homes?',
-    a: 'A builder-financing program for single-family homes. We purchase the home, then sell it to a qualified buyer at a fixed price with no interest — paid off over 5 years after a 30% down payment.',
+    a: 'A builder-financing program for single-family homes. We purchase the home, then sell it to a qualified buyer at a fixed price with no interest. It is paid off over 5 years after a 30% down payment.',
   },
   {
     q: 'How is this different from conventional financing?',
-    a: 'No interest, period. Instead of compounding interest, you pay a fixed cost-plus markup — meaning you pay market value and save what you’d otherwise lose to interest.',
+    a: 'No interest, period. Instead of compounding interest, you pay a fixed cost-plus markup, meaning you pay market value and save what you’d otherwise lose to interest.',
   },
   {
     q: 'Is a down payment required?',
-    a: 'Yes — a minimum of 30% from the buyer. You’ll also need to provide 3 well-qualified references, and two of them may be asked to contribute 5% each.',
+    a: 'Yes, a minimum of 30% from the buyer. You’ll also need to provide 3 well-qualified references, and two of them may be asked to contribute 5% each.',
   },
   {
     q: 'Who is eligible?',
@@ -25,7 +25,7 @@ export const faqs = [
   },
   {
     q: 'What financing options are available?',
-    a: 'Murabaha — our cost-plus, builder-financing model.',
+    a: 'Murabaha: our cost-plus, builder-financing model.',
   },
   {
     q: 'What property types does RibaFree Homes finance?',
@@ -37,7 +37,7 @@ export const faqs = [
   },
   {
     q: 'What happens if I miss a payment?',
-    a: 'We’ll work with you on a manageable payment plan — no interest, no penalty fees.',
+    a: 'We’ll work with you on a manageable payment plan, with no interest and no penalty fees.',
   },
   {
     q: 'Can non-Muslims apply?',

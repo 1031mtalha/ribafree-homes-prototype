@@ -11,8 +11,8 @@ export default function HowItWorks() {
           <span className="eyebrow fade-up">How it works</span>
           <h1 className="fade-up d1">A sale, not a loan.</h1>
           <p className="lede fade-up d2">
-            RibaFree structures home purchases as a murabaha — a cost-plus
-            sale with one fixed price — instead of an interest-bearing loan.
+            RibaFree structures home purchases as a murabaha, a cost-plus
+            sale with one fixed price, instead of an interest-bearing loan.
             Here is the whole mechanism, in plain language.
           </p>
         </div>
@@ -43,9 +43,9 @@ export default function HowItWorks() {
                 <h2 style={{ marginBottom: '1.2rem' }}>Cash up front changes the deal</h2>
                 <p style={{ color: 'var(--muted)', marginBottom: '1rem' }}>
                   In a conventional build, the builder is paid through a
-                  lender’s draw schedule — slowly, with contingencies. RibaFree
-                  and its investors pay the builder in full, in cash, at the
-                  start.
+                  lender’s draw schedule, slowly and with contingencies.
+                  RibaFree and its investors pay the builder in full, in cash,
+                  at the start.
                 </p>
                 <p style={{ color: 'var(--muted)' }}>
                   That is the builder’s incentive to quote a fair price. It’s

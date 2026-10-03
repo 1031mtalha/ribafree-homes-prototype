@@ -49,9 +49,12 @@ export default function Nav() {
             </NavLink>
           </li>
         ))}
-        <li>
-          <NavLink to="/contact" className="nav-cta" onClick={() => setOpen(false)}>
-            Contact
+        <li className="nav-cta-group">
+          <NavLink to="/contact?track=investor" className="nav-cta invest" onClick={() => setOpen(false)}>
+            Investor inquiry
+          </NavLink>
+          <NavLink to="/contact?track=buyer" className="nav-cta" onClick={() => setOpen(false)}>
+            Buyer inquiry
           </NavLink>
         </li>
       </ul>

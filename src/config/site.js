@@ -21,5 +21,5 @@ export const site = {
 
   // Shown in the footer on every page of the prototype.
   prototypeNotice:
-    'Prototype for internal review — not a live offering. Items marked "Needs content" are pending real information from Atif.',
+    'Prototype for internal review, not a live offering. Items marked "Needs content" are pending real information from Atif.',
 }

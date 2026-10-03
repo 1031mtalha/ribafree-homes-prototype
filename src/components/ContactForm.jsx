@@ -67,8 +67,8 @@ export default function ContactForm({ track }) {
       <div className="form-success">
         <h3>Inquiry recorded</h3>
         <p>
-          Thanks, {values.name}. This prototype doesn’t send email yet — in the
-          real build this {track} inquiry would go to {site.email}.
+          Thanks, {values.name}. This prototype doesn’t send email yet. In the
+          real build, this {track} inquiry would go to {site.email}.
         </p>
       </div>
     )

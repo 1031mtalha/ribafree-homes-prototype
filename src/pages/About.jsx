@@ -11,7 +11,7 @@ export default function About() {
           <h1 className="fade-up d1">Homes without debt that grows.</h1>
           <p className="lede fade-up d2">
             RibaFree Homes exists to make homeownership possible without
-            interest-based lending — pairing buyers who are close to
+            interest-based lending. It pairs buyers who are close to
             affording a home with investors who fund real projects, through
             fixed-price sales instead of loans.
           </p>
@@ -28,8 +28,8 @@ export default function About() {
                 <p style={{ color: 'var(--muted)', marginBottom: '1rem' }}>
                   We buy or build homes with investor capital, pay builders
                   cash up front, and resell each home to its buyer at one
-                  fixed price paid over time. The structure is a murabaha — a
-                  cost-plus sale — so nothing compounds and nothing is hidden
+                  fixed price paid over time. The structure is a murabaha, a
+                  cost-plus sale, so nothing compounds and nothing is hidden
                   in the rate.
                 </p>
                 <p style={{ color: 'var(--muted)' }}>

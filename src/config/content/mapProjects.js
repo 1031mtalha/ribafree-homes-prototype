@@ -49,7 +49,7 @@ export const mapProjects = [
   {
     id: 'whitebluff',
     name: 'Whitebluff',
-    location: 'Lake Whitney — Whitney, TX',
+    location: 'Lake Whitney, Whitney, TX',
     status: 'Upcoming',
     lat: 32.03,
     lon: -97.4,
@@ -60,7 +60,7 @@ export const mapProjects = [
   {
     id: 'rock-creek',
     name: 'Rock Creek',
-    location: 'Lake Texoma — Gordonville, TX',
+    location: 'Lake Texoma, Gordonville, TX',
     status: 'Upcoming',
     lat: 33.83,
     lon: -96.86,
@@ -82,7 +82,7 @@ export const mapProjects = [
   {
     id: 'the-cliffs',
     name: 'The Cliffs',
-    location: 'Possum Kingdom Lake — Graford, TX',
+    location: 'Possum Kingdom Lake, Graford, TX',
     status: 'Upcoming',
     lat: 32.88,
     lon: -98.47,

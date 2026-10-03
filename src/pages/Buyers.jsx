@@ -10,8 +10,8 @@ export default function Buyers() {
           <span className="eyebrow buyer fade-up">For home buyers</span>
           <h1 className="fade-up d1">Close, but short? This is for you.</h1>
           <p className="lede fade-up d2">
-            RibaFree is built for buyers who are nearly there — typically
-            within $100k–$200k of affording a home — but won’t take on
+            RibaFree is built for buyers who are nearly there, typically
+            within $100k–$200k of affording a home, but who won’t take on
             interest to cross the gap. Honest scope: it is not a zero-down
             program.
           </p>
@@ -33,16 +33,16 @@ export default function Buyers() {
               </div>
             </Reveal>
             <Reveal>
-              <div className="card" style={{ borderTop: '3px solid var(--line)' }}>
+              <div className="card" style={{ borderTop: '3px solid var(--invest)' }}>
                 <span className="eyebrow">Honestly, not yet a fit</span>
                 <ul className="checklist">
-                  <li>You can’t make a ~30% down payment yet — this program doesn’t replace saving</li>
+                  <li>You can’t yet make a ~30% down payment, and this program doesn’t replace saving</li>
                   <li>You’re looking for zero-down or low-down financing</li>
-                  <li>You need to move immediately — projects follow build and purchase timelines</li>
+                  <li>You need to move immediately, but projects follow build and purchase timelines</li>
                 </ul>
                 <p style={{ color: 'var(--muted)', fontSize: '0.9rem', marginTop: '1rem' }}>
                   If that’s you today, the How It Works page shows what to save
-                  toward — the door stays open.
+                  toward. The door stays open.
                 </p>
               </div>
             </Reveal>
@@ -78,7 +78,7 @@ export default function Buyers() {
                   <li>
                     <div>
                       <strong>3. Fixed-price agreement.</strong> Your home’s
-                      total price is set at signing — a murabaha sale, not a
+                      total price is set at signing: a murabaha sale, not a
                       loan.
                     </div>
                   </li>
@@ -101,8 +101,8 @@ export default function Buyers() {
           <h2>Tell us where you stand</h2>
           <p className="lede">
             The buyer form asks about your target area, budget, and down
-            payment readiness — it goes to the buyer track, not the investor
-            pipeline.
+            payment readiness, and it goes to the buyer track, not the
+            investor pipeline.
           </p>
           <div className="hero-actions">
             <Link to="/contact?track=buyer" className="btn buyer">Buyer inquiry</Link>

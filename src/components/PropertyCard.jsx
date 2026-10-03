@@ -23,7 +23,7 @@ export default function PropertyCard({ property }) {
         <dl className="project-fields">
           <div>
             <dt>Rent</dt>
-            <dd>{property.rent}{property.rentNote ? ` — ${property.rentNote}` : ''}</dd>
+            <dd>{property.rent}{property.rentNote ? ` (${property.rentNote})` : ''}</dd>
           </div>
           <div>
             <dt>Size</dt>

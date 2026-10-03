@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-03T00:00:00.000Z",
+  "title": "Design System: RibaFree Homes",
+  "extensions": {
+    "colorMeta": {
+      "invest": {
+        "role": "primary",
+        "displayName": "Signal Red",
+        "canonical": "#c23b2c",
+        "tonalRamp": ["#3a1310", "#5c1d17", "#842a20", "#ab3327", "#c23b2c", "#d66a5b", "#e8a398", "#f7ddd8"]
+      },
+      "buyer": {
+        "role": "secondary",
+        "displayName": "Forest Green",
+        "canonical": "#1f7a4c",
+        "tonalRamp": ["#0b2817", "#123d23", "#185a33", "#1c6c3f", "#1f7a4c", "#4a9c70", "#8fc4a5", "#d3ecdd"]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Pure White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#1a1a1a", "#333333", "#595959", "#808080", "#b3b3b3", "#d9d9d9", "#f0f0f0", "#ffffff"]
+      },
+      "surface-sunken": {
+        "role": "neutral",
+        "displayName": "Sunken Grey",
+        "canonical": "#f3f4f2",
+        "tonalRamp": ["#181918", "#2d2f2d", "#454743", "#5f615d", "#7b7d79", "#9a9c98", "#c0c1bf", "#f3f4f2"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Near-Black Ink",
+        "canonical": "#15171a",
+        "tonalRamp": ["#0a0b0c", "#15171a", "#24262a", "#36383c", "#5b6168", "#8a8f94", "#bfc2c6", "#eceded"]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Grey",
+        "canonical": "#5b6168",
+        "tonalRamp": ["#15171a", "#26282b", "#3a3d41", "#5b6168", "#7d828a", "#a3a7ad", "#cacdd1", "#eef0f1"]
+      },
+      "nav-idle": {
+        "role": "neutral",
+        "displayName": "Nav Idle Grey",
+        "canonical": "#363a3f",
+        "tonalRamp": ["#15171a", "#1f2124", "#2b2e32", "#363a3f", "#53585e", "#7a7f85", "#aaaeb2", "#dadcde"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(16, 18, 16, 0.10)",
+        "tonalRamp": ["rgba(16,18,16,0.95)", "rgba(16,18,16,0.80)", "rgba(16,18,16,0.60)", "rgba(16,18,16,0.40)", "rgba(16,18,16,0.22)", "rgba(16,18,16,0.10)", "rgba(16,18,16,0.05)", "rgba(16,18,16,0.02)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero H1 headlines only." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2 headings." },
+      "title": { "displayName": "Title", "purpose": "Card H3 titles, FAQ summaries." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy, 16.5px base." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, field labels, badge text — uppercase, wide letter-spacing." }
+    },
+    "shadows": [
+      { "name": "ambient", "value": "0 4px 16px rgba(16, 18, 16, 0.08)", "purpose": "Resting elevation for cards, lot carousel, project cards, map popover." },
+      { "name": "lifted", "value": "0 20px 48px rgba(16, 18, 16, 0.16)", "purpose": "Floating hero search card; listing-card hover state." }
+    ],
+    "motion": [
+      { "name": "fade-up", "value": "translateY(26px)->translateY(0), opacity 0->1, 0.9s cubic-bezier(0.22,1,0.36,1)", "purpose": "Hero entrance only (eyebrow/h1/lede/actions), staggered via .d1/.d2/.d3." },
+      { "name": "reveal", "value": "translateY(14px)->translateY(0), opacity 0->1, 0.7s ease", "purpose": "Generic scroll-reveal for non-hero sections." },
+      { "name": "tx-pulse", "value": "scale(1)->scale(2.6), opacity 0.8->0, 2.2s ease-out infinite", "purpose": "Texas map in-progress marker ring — the one sustained ambient motion in the system." }
+    ],
+    "breakpoints": [
+      { "name": "nav-collapse", "value": "1080px" },
+      { "name": "grid-2col", "value": "920px" },
+      { "name": "search-stack", "value": "860px" },
+      { "name": "mobile", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Investor Button",
+      "kind": "button",
+      "refersTo": "button-primary-invest",
+      "description": "Primary CTA for investor-track actions (e.g. \"I'm an investor\").",
+      "html": "<button class=\"ds-btn-invest\">I'm an investor</button>",
+      "css": ".ds-btn-invest { display: inline-block; font-family: 'Public Sans', 'Helvetica Neue', sans-serif; font-size: 0.86rem; font-weight: 700; padding: 14px 28px; border-radius: 999px; border: 1.5px solid #c23b2c; background: #c23b2c; color: #fff; cursor: pointer; transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease; } .ds-btn-invest:hover { background: #a62f22; border-color: #a62f22; transform: translateY(-1px); } .ds-btn-invest:focus-visible { outline: 2px solid #a62f22; outline-offset: 2px; }"
+    },
+    {
+      "name": "Buyer Button",
+      "kind": "button",
+      "refersTo": "button-primary-buyer",
+      "description": "Primary CTA for buyer-track actions (e.g. \"I want to buy a home\").",
+      "html": "<button class=\"ds-btn-buyer\">I want to buy a home</button>",
+      "css": ".ds-btn-buyer { display: inline-block; font-family: 'Public Sans', 'Helvetica Neue', sans-serif; font-size: 0.86rem; font-weight: 700; padding: 14px 28px; border-radius: 999px; border: 1.5px solid #1f7a4c; background: #1f7a4c; color: #fff; cursor: pointer; transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease; } .ds-btn-buyer:hover { background: #185f3c; border-color: #185f3c; transform: translateY(-1px); } .ds-btn-buyer:focus-visible { outline: 2px solid #185f3c; outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Select field used inside the floating hero search card (location/status/type).",
+      "html": "<div class=\"ds-field\"><label for=\"ds-loc\">Location</label><select id=\"ds-loc\"><option>All locations</option></select></div>",
+      "css": ".ds-field { padding: 4px 24px; border-right: 1px solid rgba(16,18,16,0.10); display: flex; flex-direction: column; gap: 4px; justify-content: center; } .ds-field label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5b6168; } .ds-field select { border: none; background: transparent; font-family: 'Public Sans', 'Helvetica Neue', sans-serif; font-size: 0.98rem; font-weight: 600; color: #15171a; padding: 2px 0; } .ds-field select:focus { outline: none; }"
+    },
+    {
+      "name": "Fixed Nav",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Fixed white translucent-blurred nav with two track-colored CTA pills.",
+      "html": "<header class=\"ds-nav\"><div class=\"ds-nav-logo\">RibaFree Homes</div><ul class=\"ds-nav-links\"><li><a href=\"#\">How It Works</a></li><li><a href=\"#\" class=\"ds-nav-cta ds-nav-cta-buyer\">Buyer inquiry</a></li><li><a href=\"#\" class=\"ds-nav-cta ds-nav-cta-invest\">Investor inquiry</a></li></ul></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(16,18,16,0.10); font-family: 'Public Sans', 'Helvetica Neue', sans-serif; } .ds-nav-links { display: flex; align-items: center; gap: 30px; list-style: none; } .ds-nav-links a { font-size: 0.86rem; font-weight: 600; color: #363a3f; transition: color 0.2s ease; } .ds-nav-links a:hover { color: #15171a; } .ds-nav-cta { border-radius: 999px; padding: 9px 20px; font-size: 0.8rem; } .ds-nav-cta-buyer { border: 1.5px solid #1f7a4c; color: #1f7a4c; } .ds-nav-cta-buyer:hover { background: #1f7a4c; color: #fff; } .ds-nav-cta-invest { border: 1.5px solid #c23b2c; background: #c23b2c; color: #fff; } .ds-nav-cta-invest:hover { background: #a62f22; border-color: #a62f22; }"
+    },
+    {
+      "name": "Listing Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Search-result card: type/status badges, title, location detail, hover lift.",
+      "html": "<a href=\"#\" class=\"ds-listing-card\"><div class=\"ds-badges\"><span class=\"ds-badge\">Rental</span><span class=\"ds-badge ds-badge-sample\">Sample data</span></div><h3>Arbor Dr, Princeton, TX</h3><p class=\"ds-location\">$1,800/mo rental</p></a>",
+      "css": ".ds-listing-card { display: block; background: #fff; border: 1px solid rgba(16,18,16,0.10); border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(16,18,16,0.08); transition: transform 0.2s ease, box-shadow 0.2s ease; font-family: 'Public Sans', 'Helvetica Neue', sans-serif; color: #15171a; } .ds-listing-card:hover, .ds-listing-card:focus-visible { transform: translateY(-3px); box-shadow: 0 20px 48px rgba(16,18,16,0.16); } .ds-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; } .ds-badge { display: inline-block; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(16,18,16,0.10); color: #5b6168; } .ds-badge-sample { color: #c23b2c; border-color: #c23b2c; background: rgba(194,59,44,0.10); } .ds-listing-card h3 { font-size: 1.1rem; margin-bottom: 4px; font-weight: 700; } .ds-location { color: #5b6168; font-size: 0.85rem; }"
+    },
+    {
+      "name": "Track Badge",
+      "kind": "chip",
+      "refersTo": "badge-invest",
+      "description": "Pill-shaped status/track chip, tinted to the investor or buyer track.",
+      "html": "<span class=\"ds-chip ds-chip-invest\">In Progress</span>",
+      "css": ".ds-chip { display: inline-block; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; border: 1px solid; font-family: 'Public Sans', 'Helvetica Neue', sans-serif; } .ds-chip-invest { color: #c23b2c; border-color: #c23b2c; background: rgba(194,59,44,0.10); } .ds-chip-buyer { color: #1f7a4c; border-color: #1f7a4c; background: rgba(31,122,76,0.10); }"
+    },
+    {
+      "name": "Floating Search Card",
+      "kind": "custom",
+      "refersTo": "hero-search",
+      "description": "Signature component: white lifted-shadow card overlapping the hero's lower edge, holding the three-field + submit property search.",
+      "html": "<form class=\"ds-search-card\"><div class=\"ds-search-field\"><label>Location</label><select><option>All locations</option></select></div><div class=\"ds-search-field\"><label>Status</label><select><option>Any status</option></select></div><div class=\"ds-search-field\"><label>Type</label><select><option>All types</option></select></div><button type=\"submit\" class=\"ds-search-submit\">Search</button></form>",
+      "css": ".ds-search-card { background: #fff; border-radius: 16px; box-shadow: 0 20px 48px rgba(16,18,16,0.16); padding: 22px 24px; margin-top: -64px; display: grid; grid-template-columns: repeat(3, 1fr) auto; align-items: stretch; font-family: 'Public Sans', 'Helvetica Neue', sans-serif; } .ds-search-field { padding: 4px 24px; border-right: 1px solid rgba(16,18,16,0.10); display: flex; flex-direction: column; gap: 4px; justify-content: center; } .ds-search-field label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5b6168; } .ds-search-field select { border: none; background: transparent; font-size: 0.98rem; font-weight: 600; color: #15171a; } .ds-search-submit { display: flex; align-items: center; justify-content: center; padding: 0 34px; margin-left: 20px; border: none; border-radius: 10px; background: #c23b2c; color: #fff; font-size: 0.86rem; font-weight: 700; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; } .ds-search-submit:hover { background: #a62f22; transform: translateY(-1px); } .ds-search-submit:focus-visible { outline: 2px solid #a62f22; outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Operator's Storefront",
+    "overview": "RibaFree Homes reads like a working real-estate operator's site, not an editorial essay about one. The ground is white, the type is one geometric sans used everywhere, and the one piece of color vocabulary in the whole system is spent on telling two audiences apart: investor (signal red) and buyer (forest green). This replaced an earlier cream-background, serif-display, terracotta/sage world outright — that world is gone from the shipped code and is not a reference for new screens. The new world is brief-pinned to the live ribafreehomes.com site's own register: photographic trust (a full-bleed hero photo, not an illustration or gradient field) plus a live functional search, because the product's credibility problem is \"does this look like a real operator,\" not \"does this look tasteful.\" Depth is soft and ambient (diffuse shadows, no hard borders doing the work alone), corners are gently rounded rather than sharp, and the one signature motion moment — the Texas project map — uses pulsing rings and scale transforms sparingly, confined to that single component.",
+    "keyCharacteristics": [
+      "White canvas, near-black text, no warm/cream undertone anywhere in the shipped CSS.",
+      "Exactly two accent colors, each permanently bound to one audience track (never used interchangeably).",
+      "One font family (Public Sans) for display, body, and label — no serif, no second typeface.",
+      "Soft elevation (ambient box-shadows) rather than borders or flat tonal layering.",
+      "Pill-shaped buttons and nav CTAs; 10px/16px radius on everything else.",
+      "A full-bleed photographic hero with a floating white search card overlapping its lower edge."
+    ],
+    "rules": [
+      { "name": "The Two-Track Rule", "body": "Red is investor, green is buyer, always — never swapped, never used as a generic \"accent\" on content that isn't track-specific. This is a locked product principle (PRODUCT.md #1), not a stylistic preference.", "section": "colors" },
+      { "name": "The Soft-Tint Rule", "body": "Both track colors get a -soft background variant (~10% opacity) for badges, outline buttons, and the active form-toggle state — the solid color is reserved for buttons and small marks, never a large fill.", "section": "colors" },
+      { "name": "The One-Family Rule", "body": "Every typographic role — display, body, label, even the Texas-map card and lot-card titles — resolves to Public Sans. No second family is introduced for \"editorial\" moments.", "section": "typography" },
+      { "name": "The Ambient-Not-Structural Rule", "body": "Shadows read as soft light falloff, never as a hard drop-shadow or a colored glow. They signal \"this surface floats above the canvas,\" not \"this is a button you must press.\"", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep every investor-facing accent in signal red (#c23b2c) and every buyer-facing accent in forest green (#1f7a4c) — this is a structural product requirement, not a palette preference.",
+      "Do use the -soft tint variants for badges, outline buttons, and toggles; reserve the solid track color for buttons, small marks, and the map.",
+      "Do use pill radius (999px) for anything clickable (buttons, nav CTAs, form toggle) and 16px/10px for containers — the shapes should tell a user which is which without reading the text.",
+      "Do use the ambient shadow pair (--shadow / --shadow-lg) for elevation; don't introduce a third shadow value without a reason tied to a new elevation tier.",
+      "Do keep hero sections photographic and full-bleed with a dark gradient overlay for text legibility, consistent with the \"operator, not editorial essay\" thesis."
+    ],
+    "donts": [
+      "Don't reintroduce a serif display font, cream/warm backgrounds, or terracotta/sage accents — that is the explicitly retired world, not a variant of the current one.",
+      "Don't use dashed borders as a generic \"needs content\" callout device. The system's one dashed stroke (the Texas map's \"upcoming\" marker) is a cartographic convention for an unconfirmed project location, not a placeholder-flagging pattern to be reused elsewhere; unverified data is flagged with the .badge.sample chip instead.",
+      "Don't mix the track colors on the same element or use either one as a generic decorative accent on content that isn't investor- or buyer-specific.",
+      "Don't add a third named accent color; the system is built on exactly two, and a third would blur the one piece of color-coding the product actually depends on."
+    ]
+  }
+}

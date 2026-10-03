@@ -17,7 +17,7 @@ export default function Investors() {
             Investor capital funds land acquisition, distressed property
             rehab, and new construction. Builders are paid cash; homes are
             sold to qualified buyers at fixed prices. Returns come from real
-            projects — not interest on debt.
+            projects, not interest on debt.
           </p>
         </div>
       </section>
@@ -29,7 +29,7 @@ export default function Investors() {
               <span className="eyebrow invest">Portfolio</span>
               <h2>Held & prior properties</h2>
               <p className="lede" style={{ marginTop: '1rem' }}>
-                Past investor-track deals — Atif buying, building, or
+                Past investor-track deals: Atif buying, building, or
                 rehabbing with builders, then holding, renting, or selling.
                 These are not buyer-program (0%-markup) sales; no home has
                 been confirmed sold under that model yet.
@@ -50,8 +50,8 @@ export default function Investors() {
                 <h3>Floor plans & lots on file</h3>
                 <p style={{ color: 'var(--muted)', marginTop: '0.8rem' }}>
                   Records from builder communities. Whether each was actually
-                  transacted by RibaFree, and current status, is unconfirmed —
-                  shown as-is, not guessed.
+                  transacted by RibaFree, and current status, is unconfirmed,
+                  so it's shown as-is, not guessed.
                 </p>
               </div>
             </Reveal>
@@ -68,7 +68,7 @@ export default function Investors() {
               <h2>Current & recent projects</h2>
               <p className="lede" style={{ marginTop: '1rem' }}>
                 Every project lists the same fields: location, land cost, home
-                size, projected ROI, and a three-stage deposit structure —
+                size, projected ROI, and a three-stage deposit structure:
                 initial, second, final.
               </p>
             </div>
@@ -93,7 +93,7 @@ export default function Investors() {
                 <h2 style={{ marginBottom: '1.2rem' }}>Three clear stages</h2>
                 <p style={{ color: 'var(--muted)' }}>
                   Investor participation follows a consistent three-deposit
-                  schedule per project — an initial deposit to enter, a second
+                  schedule per project: an initial deposit to enter, a second
                   at a defined project milestone, and a final deposit at
                   completion stage. Exact amounts and milestone definitions are
                   set per project.
@@ -102,9 +102,9 @@ export default function Investors() {
             </Reveal>
             <Reveal>
               <ul className="checklist invest" style={{ alignSelf: 'center' }}>
-                <li>Initial deposit — secures your position in the project</li>
-                <li>Second deposit — due at the project’s defined milestone</li>
-                <li>Final deposit — due at completion stage</li>
+                <li>Initial deposit: secures your position in the project</li>
+                <li>Second deposit: due at the project’s defined milestone</li>
+                <li>Final deposit: due at completion stage</li>
               </ul>
             </Reveal>
           </div>
