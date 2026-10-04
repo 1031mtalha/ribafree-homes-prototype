@@ -62,14 +62,17 @@ const LOCALLY_HELD_FILES = new Set([
 //    two path cards only — every other community-set photo in the pack
 //    stays unprocessed (matched by exact manifest `file`, since
 //    community-set rows have site_target: null).
-// 2) already-in-scope property/lot interior photos, for the three
-//    Buyers/HowItWorks/About side-images — these are real property photos
-//    whose galleries are generated into photosByTarget but never actually
-//    rendered anywhere in the UI (LotCarousel only shows a lot's cover, not
-//    its full gallery), so wiring one in here doesn't duplicate anything
-//    already on the site. All four real (non-rendering) exterior photos in
-//    the pack are already used as property/lot covers elsewhere, so these
-//    three are interiors by necessity, not preference.
+// 2) already-in-scope property/lot interior photos, for the
+//    Buyers/HowItWorks/About/Contact side-images — these are real property
+//    photos whose galleries are generated into photosByTarget but never
+//    actually rendered anywhere in the UI beyond their lot's single cover
+//    (LotCarousel only shows a lot's cover, not its full gallery; a held
+//    property like Arbor Dr does show its whole gallery via PropertyCard, so
+//    Arbor Dr photos are excluded from this slot pool entirely), so wiring
+//    one in here doesn't duplicate anything already on the site. All real
+//    (non-rendering) exterior photos in the pack are already used as
+//    property/lot covers elsewhere, so these are interiors by necessity, not
+//    preference.
 // Output goes to public/photos/site/ (not a per-property folder), since
 // there's no property grouping for page chrome. Alt text here is curated by
 // hand (factual, generic, no community/property name, address, or ownership
@@ -98,6 +101,10 @@ const SLOTS = {
   aboutSide: {
     file: 'sabina-dr/living-1.jpg',
     alt: 'Living room with a ceiling fan and built-in fireplace',
+  },
+  contactSide: {
+    file: 'oakcrest-ln/kitchen-1.jpg',
+    alt: 'Kitchen with white cabinets, granite countertops, and an open staircase',
   },
 }
 

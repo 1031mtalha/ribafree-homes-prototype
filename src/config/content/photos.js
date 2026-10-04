@@ -507,5 +507,14 @@ export const sitePhotos = {
     "h": 700,
     "alt": "Living room with a ceiling fan and built-in fireplace",
     "kind": "photo"
+  },
+  "contactSide": {
+    "src480": "/photos/site/contactSide-480.webp",
+    "src960": "/photos/site/contactSide-960.webp",
+    "srcNative": "/photos/site/contactSide-1244.webp",
+    "w": 1244,
+    "h": 700,
+    "alt": "Kitchen with white cabinets, granite countertops, and an open staircase",
+    "kind": "photo"
   }
 }

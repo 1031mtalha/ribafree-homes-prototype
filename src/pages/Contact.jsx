@@ -37,7 +37,15 @@ export default function Contact() {
         <div className="grid-2" style={{ gap: 56, alignItems: 'start' }}>
           <ContactForm key={track} track={track} />
           <div className="side-image" style={{ height: 420 }}>
-            <img src={images.contactSide} alt="Interior" loading="lazy" />
+            <img
+              src={images.contactSide.src960}
+              srcSet={`${images.contactSide.src480} 480w, ${images.contactSide.src960} 960w, ${images.contactSide.srcNative} ${images.contactSide.w}w`}
+              sizes="(max-width: 640px) 100vw, 50vw"
+              width={images.contactSide.w}
+              height={images.contactSide.h}
+              alt={images.contactSide.alt}
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
