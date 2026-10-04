@@ -217,7 +217,7 @@ Two radius steps cover the whole system: `10px` (token `--radius`) for inputs, s
 ### Navigation
 - Fixed, white, translucent-blurred bar (`rgba(255,255,255,0.96)`, `blur(10px)`) with a hairline bottom border. It is not a transparent-over-hero bar; it sits above the hero at all scroll positions and shrinks on scroll (padding `16px→10px`, logo scales to `0.815`, a shadow appears).
 - Nav links are `0.86rem` semibold, idle in nav-idle grey, darkening to near-black on hover/active.
-- Two CTA pills sit at the end of the nav: a bordered green "Buyer inquiry" pill and a solid red "Investor inquiry" pill. The nav itself enforces the two-track rule in miniature.
+- Two CTA pills sit at the end of the nav: a solid green "Buyer inquiry" pill and a solid red "Investor inquiry" pill. The nav itself enforces the two-track rule in miniature.
 - Below 1080px, links and CTAs collapse into a full-width dropdown triggered by a bordered square burger button.
 
 ### Hero + Floating Search Card (signature pattern)
