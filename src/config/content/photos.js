@@ -159,14 +159,6 @@ export const photosByTarget = {
         "kind": "photo"
       },
       {
-        "src480": "/photos/arbor-dr/living-2-480.webp",
-        "src960": "/photos/arbor-dr/living-2-960.webp",
-        "w": 960,
-        "h": 720,
-        "alt": "Living area, Arbor Dr",
-        "kind": "photo"
-      },
-      {
         "src480": "/photos/arbor-dr/kitchen-1-480.webp",
         "src960": "/photos/arbor-dr/kitchen-1-960.webp",
         "w": 960,
@@ -185,14 +177,6 @@ export const photosByTarget = {
       {
         "src480": "/photos/arbor-dr/bedroom-1-480.webp",
         "src960": "/photos/arbor-dr/bedroom-1-960.webp",
-        "w": 960,
-        "h": 720,
-        "alt": "Bedroom, Arbor Dr",
-        "kind": "photo"
-      },
-      {
-        "src480": "/photos/arbor-dr/bedroom-2-480.webp",
-        "src960": "/photos/arbor-dr/bedroom-2-960.webp",
         "w": 960,
         "h": 720,
         "alt": "Bedroom, Arbor Dr",

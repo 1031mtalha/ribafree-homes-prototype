@@ -6,11 +6,12 @@
 //
 // Scope rule: a manifest row is processed only if it has a non-null
 // site_target AND its `use` is not "hold-pending-confirmation", "exclude",
-// or a "community-set-unwired:*" value. Everything else in the pack
-// (community sets, held-pending rows, excluded rows) is read but never
+// or a "community-set-unwired:*" value, AND its file is not in
+// LOCALLY_HELD_FILES below. Everything else in the pack (community sets,
+// held-pending rows, excluded rows, locally-held rows) is read but never
 // written anywhere.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync, rmSync } from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import { fileURLToPath } from 'node:url'
@@ -45,10 +46,22 @@ const TITLES = {
 
 const EXCLUDED_USES = new Set(['hold-pending-confirmation', 'exclude'])
 
+// Held back here rather than in the (read-only) pack manifest: these two
+// Arbor Dr interior photos carry a manifest note that they look virtually
+// staged, which is an unconfirmed fact per PRODUCT.md (never present
+// unconfirmed staging as the unit's real condition). See the matching
+// open question in src/config/content/portfolio.js — once Atif confirms
+// one way or the other, update this list accordingly.
+const LOCALLY_HELD_FILES = new Set([
+  'arbor-dr/living-1.webp', // "living dining.webp" — looks virtually staged
+  'arbor-dr/bedroom-1.webp', // "bed-main.webp" — looks virtually staged
+])
+
 function isInScope(row) {
   if (!row.site_target) return false
   if (EXCLUDED_USES.has(row.use)) return false
   if (row.use.startsWith('community-set-unwired')) return false
+  if (LOCALLY_HELD_FILES.has(row.file)) return false
   return true
 }
 
@@ -100,6 +113,10 @@ async function main() {
     const title = TITLES[targetId]
     const propertyFolder = rows[0].property
     const outDir = path.join(OUT_PHOTOS_DIR, propertyFolder)
+    // Clear first: role-index numbers (e.g. "living-2") shift when a row
+    // drops out of scope (LOCALLY_HELD_FILES, or a manifest edit), which
+    // would otherwise leave stale, no-longer-referenced files behind.
+    rmSync(outDir, { recursive: true, force: true })
     mkdirSync(outDir, { recursive: true })
 
     const roleCounts = new Map()

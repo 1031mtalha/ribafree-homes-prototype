@@ -61,5 +61,5 @@ export const portfolioOpenQuestions = [
   'Which of these are actual completed/current deals (investor-track), vs. builder floor plans Atif is collecting as reference for future projects?',
   'Is "Arbor Dr" under Winchester Crossing the same property as "Arbor Dr" under South Arbor Trails (Princeton), or two different addresses that happen to share a street name?',
   "Is there a relationship with the builder (e.g. D.R. Horton) worth disclosing on the site, or should builder-sourced material (like the Construction Stages deck) be rewritten in RibaFree's own words before it's public-facing?",
-  "The photo pack flags two Arbor Dr interior photos (living room, primary bedroom) as 'looks virtually staged' — confirm with Atif whether they're staged, and if so, disclose that on the listing rather than present them as the unit's current condition.",
+  "The photo pack flags two Arbor Dr interior photos (living room, primary bedroom) as 'looks virtually staged'. They're held out of the gallery for now (see LOCALLY_HELD_FILES in scripts/build-photos.mjs) — confirm with Atif whether they're staged and, if so, whether disclosed staged photos would be acceptable to add back.",
 ]
