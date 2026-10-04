@@ -354,42 +354,57 @@ h3 { font-size: 1.3rem; font-weight: 600; }
 }
 
 .hero-search-field {
-  padding: 4px 24px;
+  position: relative;
+  padding: 6px 28px;
   border-right: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   justify-content: center;
 }
 
 .hero-search-field:first-child { padding-left: 4px; }
 
 .hero-search-field label {
-  font-size: 0.68rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .hero-search-field select {
+  appearance: none;
+  -webkit-appearance: none;
   border: none;
   background: transparent;
   font-family: var(--font-sans);
-  font-size: 0.98rem;
-  font-weight: 600;
-  color: var(--text);
-  padding: 2px 0;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--muted);
+  padding: 2px 22px 2px 0;
+  cursor: pointer;
 }
 
 .hero-search-field select:focus { outline: none; }
+
+.hero-search-field::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  bottom: 14px;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
 
 .hero-search-submit {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 0 34px;
+  padding: 0 32px;
   margin-left: 20px;
   border: none;
   border-radius: calc(var(--radius-lg) - 6px);
@@ -402,6 +417,8 @@ h3 { font-size: 1.3rem; font-weight: 600; }
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
+
+.hero-search-submit svg { flex-shrink: 0; }
 
 .hero-search-submit:hover { background: #a62f22; transform: translateY(-1px); }
 
