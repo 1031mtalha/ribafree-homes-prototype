@@ -35,6 +35,13 @@ Not a lender and not a broker for conventional financing — RibaFree buys/holds
 - Custom Homes nav destination is intentionally undefined pending Atif — do not invent content for it.
 - Open, unresolved questions for Atif (surfaced verbatim in-app, not to be silently resolved): whether various builder lots are actual RibaFree deals vs. reference floor plans; whether two "Arbor Dr" addresses (Winchester Crossing vs. Princeton) are the same property; whether a builder relationship (e.g. D.R. Horton) needs disclosure.
 
+## Photos
+
+- Real property/lot photos come from a Drive-sourced pack the user supplies outside this repo (`~/ribafree-photo-pack/`, not committed — see `.gitignore`). `manifest.json` in that pack is the source of truth for which image goes where (`site_target`) and how it may be used (`use`); `scripts/build-photos.mjs` (`npm run photos`) reads it, strips all EXIF/GPS, and writes resized WebP files into `public/photos/` plus the generated `src/config/content/photos.js`.
+- A photo whose manifest `kind` is `"rendering"` (a builder render, not a real photograph) must show a visible "Rendering" badge wherever it's used as a cover — never presented as a photo of the built home. `LotCarousel.jsx` enforces this for lot covers.
+- `wc2-arbor-dr` (the Winchester Crossing lot) is deliberately left on its placeholder: the photo pack's `arbor-dr` folder has a phone photo (`Front.JPEG`) whose manifest `use` is `hold-pending-confirmation` because it may be the same house as the confirmed Arbor Dr rental, unconfirmed. Do not wire photos to `wc2-arbor-dr` until that identity question (see open questions above) is resolved by Atif.
+- Two Arbor Dr interior photos in the pack (living room, primary bedroom) carry a manifest note that they look virtually staged; they're wired in (the manifest marks them `gallery`, not held), but this is an unconfirmed, undisclosed fact — see the open-questions list in `portfolio.js`.
+
 ## Brand Commitments
 
 - Name: **RibaFree Homes**.
