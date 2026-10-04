@@ -57,6 +57,31 @@ const LOCALLY_HELD_FILES = new Set([
   'arbor-dr/bedroom-1.webp', // "bed-main.webp" — looks virtually staged
 ])
 
+// Page-level photo slots (hero/path-card imagery), sourced from community-set
+// photos the user explicitly authorized for these three uses only — every
+// other community-set photo in the pack stays unprocessed. Unlike the
+// property/lot pipeline above, these are matched by exact manifest `file`
+// path rather than `site_target` (community-set rows have site_target: null).
+// Output goes to public/photos/site/ (not a per-property folder), since
+// there's no property grouping for page chrome. Alt text here is curated by
+// hand (factual, generic, no community name or ownership claim) rather than
+// derived from the manifest's alt_role, since these are reused as general
+// site imagery, not a specific listing's photos.
+const SLOTS = {
+  heroHome: {
+    file: 'whitewing-princeton/exterior-aerial-1.jpg',
+    alt: 'Brick two-story home with landscaped yard, aerial view',
+  },
+  pathInvestor: {
+    file: 'whitewing-princeton/amenity-1.jpg',
+    alt: 'Aerial view of a residential community with a pool',
+  },
+  pathBuyer: {
+    file: 'whitewing-princeton/backyard-1.jpg',
+    alt: 'Backyard of a brick single-story home',
+  },
+}
+
 function isInScope(row) {
   if (!row.site_target) return false
   if (EXCLUDED_USES.has(row.use)) return false
@@ -75,6 +100,62 @@ function toImageRef(p) {
     alt: p.alt,
     kind: p.kind,
   }
+}
+
+// Shared by both the property/lot pipeline and the site-slot pipeline:
+// auto-rotate, strip metadata, write each in-range width as WebP, stepping
+// quality down only as far as needed to stay under MAX_BYTES, and asserting
+// no EXIF survived. Returns { refs, bytesWritten, filesWritten }.
+async function processWidths(srcPath, outDir, baseName, sourceWidth, publicDir) {
+  const refs = {}
+  let bytesWritten = 0
+  let filesWritten = 0
+
+  for (const width of WIDTHS) {
+    // Preserve the original property-pipeline behavior exactly: 480/960 are
+    // always attempted (withoutEnlargement caps pixels for narrower sources,
+    // it never upscales), only the 1280 tier is skipped outright when the
+    // source isn't wide enough. For the 1244px-wide site-slot sources this
+    // already means no 1280 file is written — satisfying "never upscale,
+    // no 1920 variant" — without changing behavior for existing photos.
+    if (width === 1280 && sourceWidth < 1280) continue
+
+    const outName = `${baseName}-${width}.webp`
+    const outPath = path.join(outDir, outName)
+
+    let quality = BASE_QUALITY
+    let info
+    let bytes
+    for (;;) {
+      info = await sharp(srcPath)
+        .rotate()
+        .resize({ width, withoutEnlargement: true })
+        .webp({ quality })
+        .toFile(outPath)
+      bytes = statSync(outPath).size
+      if (bytes <= MAX_BYTES || quality <= QUALITY_FLOOR) break
+      quality -= 10
+    }
+    filesWritten++
+    bytesWritten += bytes
+    if (bytes > MAX_BYTES) {
+      console.error(`Output still exceeds 300 KB at quality ${quality} (floor): ${publicDir}/${outName} (${Math.round(bytes / 1024)} KB)`)
+      process.exit(1)
+    }
+    if (quality < BASE_QUALITY) {
+      console.warn(`  (${publicDir}/${outName} stepped down to quality ${quality} to stay under 300 KB)`)
+    }
+
+    const outMeta = await sharp(outPath).metadata()
+    if (outMeta.exif) {
+      console.error(`EXIF metadata survived in ${publicDir}/${outName} — aborting.`)
+      process.exit(1)
+    }
+
+    refs[width] = { publicPath: `/photos/${publicDir}/${outName}`, w: info.width, h: info.height }
+  }
+
+  return { refs, bytesWritten, filesWritten }
 }
 
 async function main() {
@@ -134,49 +215,10 @@ async function main() {
         process.exit(1)
       }
 
-      const refs = {}
-      for (const width of WIDTHS) {
-        if (width === 1280 && row.width < 1280) continue
-
-        const outName = `${row.role}-${n}-${width}.webp`
-        const outPath = path.join(outDir, outName)
-
-        // quality ~80 by default; step down only as far as needed to stay
-        // under the 300 KB ceiling (a hard requirement), never below the floor
-        let quality = BASE_QUALITY
-        let info
-        let bytes
-        for (;;) {
-          info = await sharp(srcPath)
-            .rotate()
-            .resize({ width, withoutEnlargement: true })
-            .webp({ quality })
-            .toFile(outPath)
-          bytes = statSync(outPath).size
-          if (bytes <= MAX_BYTES || quality <= QUALITY_FLOOR) break
-          quality -= 10
-        }
-        filesOutCount++
-        totalBytes += bytes
-        if (bytes > MAX_BYTES) {
-          console.error(
-            `Output still exceeds 300 KB at quality ${quality} (floor): ` +
-              `${propertyFolder}/${outName} (${Math.round(bytes / 1024)} KB)`
-          )
-          process.exit(1)
-        }
-        if (quality < BASE_QUALITY) {
-          console.warn(`  (${propertyFolder}/${outName} stepped down to quality ${quality} to stay under 300 KB)`)
-        }
-
-        const outMeta = await sharp(outPath).metadata()
-        if (outMeta.exif) {
-          console.error(`EXIF metadata survived in ${propertyFolder}/${outName} — aborting.`)
-          process.exit(1)
-        }
-
-        refs[width] = { publicPath: `/photos/${propertyFolder}/${outName}`, w: info.width, h: info.height }
-      }
+      const baseName = `${row.role}-${n}`
+      const { refs, bytesWritten, filesWritten } = await processWidths(srcPath, outDir, baseName, row.width, propertyFolder)
+      filesOutCount += filesWritten
+      totalBytes += bytesWritten
 
       processed.push({
         use: row.use,
@@ -206,13 +248,64 @@ async function main() {
     })
   }
 
+  // --- site-level photo slots (hero/path cards) ---
+  const siteOutDir = path.join(OUT_PHOTOS_DIR, 'site')
+  rmSync(siteOutDir, { recursive: true, force: true })
+  mkdirSync(siteOutDir, { recursive: true })
+
+  const manifestByFile = new Map(manifest.map((row) => [row.file, row]))
+  const sitePhotos = {}
+
+  for (const [slot, { file, alt }] of Object.entries(SLOTS)) {
+    const row = manifestByFile.get(file)
+    if (!row) {
+      console.error(`SLOTS["${slot}"] references "${file}", which is not in the manifest. Stopping rather than guessing.`)
+      process.exit(1)
+    }
+    if (!row.use.startsWith('community-set-unwired')) {
+      console.error(
+        `SLOTS["${slot}"] expected a community-set-unwired row but "${file}" has use="${row.use}". ` +
+          `Stopping — this doesn't match what was authorized.`
+      )
+      process.exit(1)
+    }
+
+    const srcPath = path.join(PACK_DIR, row.file)
+    if (!existsSync(srcPath)) {
+      console.error(`Missing source file referenced by SLOTS: ${row.file}`)
+      process.exit(1)
+    }
+
+    const { refs, bytesWritten, filesWritten } = await processWidths(srcPath, siteOutDir, slot, row.width, 'site')
+    const r960 = refs[960] ?? refs[480]
+    sitePhotos[slot] = {
+      src480: refs[480]?.publicPath,
+      src960: r960?.publicPath,
+      w: r960.w,
+      h: r960.h,
+      alt,
+      kind: row.kind,
+    }
+
+    summary.push({
+      property: `site/${slot}`,
+      'files in': 1,
+      'files out': filesWritten,
+      'total KB': Math.round(bytesWritten / 1024),
+    })
+  }
+
   const header =
     '// AUTO-GENERATED by scripts/build-photos.mjs — do not edit by hand.\n' +
     '// Regenerate with `npm run photos`. Source: the ribafree photo pack\n' +
     '// manifest.json (kept outside this repo at ~/ribafree-photo-pack, not\n' +
-    '// committed). Each top-level key is a site_target id matching an id in\n' +
-    '// src/config/content/portfolio.js (heldProperties or lots).\n\n'
-  const body = `export const photosByTarget = ${JSON.stringify(dataOut, null, 2)}\n`
+    '// committed). Each top-level key in photosByTarget is a site_target id\n' +
+    '// matching an id in src/config/content/portfolio.js (heldProperties or\n' +
+    '// lots). sitePhotos holds page-chrome slots (hero/path cards), keyed to\n' +
+    '// the SLOTS config above and consumed by src/config/images.js.\n\n'
+  const body =
+    `export const photosByTarget = ${JSON.stringify(dataOut, null, 2)}\n\n` +
+    `export const sitePhotos = ${JSON.stringify(sitePhotos, null, 2)}\n`
   writeFileSync(OUT_DATA_PATH, header + body)
 
   let missing = 0
@@ -227,6 +320,17 @@ async function main() {
           console.error(`Referenced file missing on disk: ${publicRelative}`)
           missing++
         }
+      }
+    }
+  }
+  for (const entry of Object.values(sitePhotos)) {
+    for (const key of ['src480', 'src960']) {
+      const publicRelative = entry[key]
+      if (!publicRelative) continue
+      const abs = path.join(REPO_ROOT, 'public', publicRelative.replace(/^\//, ''))
+      if (!existsSync(abs)) {
+        console.error(`Referenced file missing on disk: ${publicRelative}`)
+        missing++
       }
     }
   }
