@@ -1,0 +1,223 @@
+#!/usr/bin/env node
+// Builds public/photos/** and src/config/content/photos.js from the
+// read-only photo pack at ~/ribafree-photo-pack (kept outside this repo;
+// see .gitignore). Re-run any time with `npm run photos` — safe to re-run,
+// output is overwritten deterministically from the manifest each time.
+//
+// Scope rule: a manifest row is processed only if it has a non-null
+// site_target AND its `use` is not "hold-pending-confirmation", "exclude",
+// or a "community-set-unwired:*" value. Everything else in the pack
+// (community sets, held-pending rows, excluded rows) is read but never
+// written anywhere.
+
+import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'node:fs'
+import path from 'node:path'
+import os from 'node:os'
+import { fileURLToPath } from 'node:url'
+import sharp from 'sharp'
+
+const PACK_DIR = path.join(os.homedir(), 'ribafree-photo-pack')
+const MANIFEST_PATH = path.join(PACK_DIR, 'manifest.json')
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
+const REPO_ROOT = path.resolve(SCRIPT_DIR, '..')
+const OUT_PHOTOS_DIR = path.join(REPO_ROOT, 'public', 'photos')
+const OUT_DATA_PATH = path.join(REPO_ROOT, 'src', 'config', 'content', 'photos.js')
+
+const MAX_BYTES = 300 * 1024
+const WIDTHS = [480, 960, 1280]
+const BASE_QUALITY = 80
+const QUALITY_FLOOR = 45
+
+// Small, stable title lookup for alt text, mirroring portfolio.js. Not
+// imported directly from portfolio.js: portfolio.js imports photos.js (the
+// file this script generates), so importing portfolio.js here would be
+// circular on a first-ever run before photos.js exists. Keep in sync if
+// titles/lotAddress change in portfolio.js.
+const TITLES = {
+  'arbor-dr-princeton': 'Arbor Dr',
+  'wc2-sabina-dr': 'Sabina Dr',
+  'wc2-oakcrest-ln': 'Oakcrest Ln',
+  'wc1-hopes-lake': '1460 Hopes Lake',
+  'wc1-outpost-way': '1611 Outpost Way',
+  'wc1-wildrose-way': 'WildRose Way',
+  'sat-morning-ridge-aspen': 'Aspen (Elevation A)',
+}
+
+const EXCLUDED_USES = new Set(['hold-pending-confirmation', 'exclude'])
+
+function isInScope(row) {
+  if (!row.site_target) return false
+  if (EXCLUDED_USES.has(row.use)) return false
+  if (row.use.startsWith('community-set-unwired')) return false
+  return true
+}
+
+function toImageRef(p) {
+  const r960 = p.refs[960] ?? p.refs[480]
+  return {
+    src480: p.refs[480]?.publicPath,
+    src960: r960?.publicPath,
+    w: r960.w,
+    h: r960.h,
+    alt: p.alt,
+    kind: p.kind,
+  }
+}
+
+async function main() {
+  if (!existsSync(MANIFEST_PATH)) {
+    console.error(`Photo pack not found at ${PACK_DIR} (expected manifest.json there).`)
+    process.exit(1)
+  }
+
+  const manifest = JSON.parse(readFileSync(MANIFEST_PATH, 'utf8'))
+  const scoped = manifest.filter(isInScope)
+
+  const groups = new Map()
+  for (const row of scoped) {
+    const id = row.site_target.id
+    if (!groups.has(id)) groups.set(id, [])
+    groups.get(id).push(row)
+  }
+
+  for (const id of groups.keys()) {
+    if (!(id in TITLES)) {
+      console.error(
+        `Manifest references site_target "${id}" with no known title mapping in this ` +
+          `script's TITLES table. Stopping rather than guessing a title for it — add it to ` +
+          `TITLES in scripts/build-photos.mjs (and confirm the id against portfolio.js) first.`
+      )
+      process.exit(1)
+    }
+  }
+
+  mkdirSync(OUT_PHOTOS_DIR, { recursive: true })
+
+  const summary = []
+  const dataOut = {}
+
+  for (const [targetId, rows] of groups) {
+    const title = TITLES[targetId]
+    const propertyFolder = rows[0].property
+    const outDir = path.join(OUT_PHOTOS_DIR, propertyFolder)
+    mkdirSync(outDir, { recursive: true })
+
+    const roleCounts = new Map()
+    let filesOutCount = 0
+    let totalBytes = 0
+    const processed = []
+
+    for (const row of rows) {
+      const n = (roleCounts.get(row.role) ?? 0) + 1
+      roleCounts.set(row.role, n)
+
+      const srcPath = path.join(PACK_DIR, row.file)
+      if (!existsSync(srcPath)) {
+        console.error(`Missing source file referenced by manifest: ${row.file}`)
+        process.exit(1)
+      }
+
+      const refs = {}
+      for (const width of WIDTHS) {
+        if (width === 1280 && row.width < 1280) continue
+
+        const outName = `${row.role}-${n}-${width}.webp`
+        const outPath = path.join(outDir, outName)
+
+        // quality ~80 by default; step down only as far as needed to stay
+        // under the 300 KB ceiling (a hard requirement), never below the floor
+        let quality = BASE_QUALITY
+        let info
+        let bytes
+        for (;;) {
+          info = await sharp(srcPath)
+            .rotate()
+            .resize({ width, withoutEnlargement: true })
+            .webp({ quality })
+            .toFile(outPath)
+          bytes = statSync(outPath).size
+          if (bytes <= MAX_BYTES || quality <= QUALITY_FLOOR) break
+          quality -= 10
+        }
+        filesOutCount++
+        totalBytes += bytes
+        if (bytes > MAX_BYTES) {
+          console.error(
+            `Output still exceeds 300 KB at quality ${quality} (floor): ` +
+              `${propertyFolder}/${outName} (${Math.round(bytes / 1024)} KB)`
+          )
+          process.exit(1)
+        }
+        if (quality < BASE_QUALITY) {
+          console.warn(`  (${propertyFolder}/${outName} stepped down to quality ${quality} to stay under 300 KB)`)
+        }
+
+        const outMeta = await sharp(outPath).metadata()
+        if (outMeta.exif) {
+          console.error(`EXIF metadata survived in ${propertyFolder}/${outName} — aborting.`)
+          process.exit(1)
+        }
+
+        refs[width] = { publicPath: `/photos/${propertyFolder}/${outName}`, w: info.width, h: info.height }
+      }
+
+      processed.push({
+        use: row.use,
+        kind: row.kind,
+        role: row.role,
+        alt: `${row.alt_role}, ${title}`,
+        refs,
+      })
+    }
+
+    const floorPlans = processed.filter((p) => p.use === 'floorplan').map(toImageRef)
+    const galleryish = processed.filter((p) => p.use !== 'floorplan')
+    const coverItem = galleryish.find((p) => p.use === 'cover')
+    const others = galleryish.filter((p) => p.use !== 'cover')
+    const orderedGallery = coverItem ? [coverItem, ...others] : others
+    const gallery = orderedGallery.map(toImageRef)
+    const cover = gallery[0] ?? null
+    const coverKind = coverItem ? coverItem.kind : null
+
+    dataOut[targetId] = { coverKind, cover, gallery, floorPlans }
+
+    summary.push({
+      property: propertyFolder,
+      'files in': rows.length,
+      'files out': filesOutCount,
+      'total KB': Math.round(totalBytes / 1024),
+    })
+  }
+
+  const header =
+    '// AUTO-GENERATED by scripts/build-photos.mjs — do not edit by hand.\n' +
+    '// Regenerate with `npm run photos`. Source: the ribafree photo pack\n' +
+    '// manifest.json (kept outside this repo at ~/ribafree-photo-pack, not\n' +
+    '// committed). Each top-level key is a site_target id matching an id in\n' +
+    '// src/config/content/portfolio.js (heldProperties or lots).\n\n'
+  const body = `export const photosByTarget = ${JSON.stringify(dataOut, null, 2)}\n`
+  writeFileSync(OUT_DATA_PATH, header + body)
+
+  let missing = 0
+  for (const entry of Object.values(dataOut)) {
+    const allRefs = [entry.cover, ...entry.gallery, ...entry.floorPlans].filter(Boolean)
+    for (const ref of allRefs) {
+      for (const key of ['src480', 'src960']) {
+        const publicRelative = ref[key]
+        if (!publicRelative) continue
+        const abs = path.join(REPO_ROOT, 'public', publicRelative.replace(/^\//, ''))
+        if (!existsSync(abs)) {
+          console.error(`Referenced file missing on disk: ${publicRelative}`)
+          missing++
+        }
+      }
+    }
+  }
+  if (missing) process.exit(1)
+
+  console.log(`Scope: ${scoped.length} of ${manifest.length} manifest rows processed.\n`)
+  console.table(summary)
+  console.log(`\nWrote ${path.relative(REPO_ROOT, OUT_DATA_PATH)}`)
+}
+
+main()
