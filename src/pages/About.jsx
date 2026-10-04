@@ -45,7 +45,15 @@ export default function About() {
             </Reveal>
             <Reveal>
               <div className="side-image" style={{ height: 460 }}>
-                <img src={images.aboutSide} alt="Residential architecture" loading="lazy" />
+                <img
+                  src={images.aboutSide.src960}
+                  srcSet={`${images.aboutSide.src480} 480w, ${images.aboutSide.src960} 960w, ${images.aboutSide.srcNative} ${images.aboutSide.w}w`}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  width={images.aboutSide.w}
+                  height={images.aboutSide.h}
+                  alt={images.aboutSide.alt}
+                  loading="lazy"
+                />
               </div>
             </Reveal>
           </div>

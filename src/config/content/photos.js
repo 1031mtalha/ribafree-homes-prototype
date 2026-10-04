@@ -468,5 +468,32 @@ export const sitePhotos = {
     "h": 700,
     "alt": "Backyard of a brick single-story home",
     "kind": "photo"
+  },
+  "buyersHero": {
+    "src480": "/photos/site/buyersHero-480.webp",
+    "src960": "/photos/site/buyersHero-960.webp",
+    "srcNative": "/photos/site/buyersHero-1244.webp",
+    "w": 1244,
+    "h": 700,
+    "alt": "Empty living room with wood-look flooring and a glass-paned back door",
+    "kind": "photo"
+  },
+  "howItWorksSide": {
+    "src480": "/photos/site/howItWorksSide-480.webp",
+    "src960": "/photos/site/howItWorksSide-960.webp",
+    "srcNative": "/photos/site/howItWorksSide-1244.webp",
+    "w": 1244,
+    "h": 700,
+    "alt": "Kitchen with a white island, stainless appliances, and tile backsplash",
+    "kind": "photo"
+  },
+  "aboutSide": {
+    "src480": "/photos/site/aboutSide-480.webp",
+    "src960": "/photos/site/aboutSide-960.webp",
+    "srcNative": "/photos/site/aboutSide-1244.webp",
+    "w": 1244,
+    "h": 700,
+    "alt": "Living room with a ceiling fan and built-in fireplace",
+    "kind": "photo"
   }
 }

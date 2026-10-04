@@ -57,16 +57,23 @@ const LOCALLY_HELD_FILES = new Set([
   'arbor-dr/bedroom-1.webp', // "bed-main.webp" — looks virtually staged
 ])
 
-// Page-level photo slots (hero/path-card imagery), sourced from community-set
-// photos the user explicitly authorized for these three uses only — every
-// other community-set photo in the pack stays unprocessed. Unlike the
-// property/lot pipeline above, these are matched by exact manifest `file`
-// path rather than `site_target` (community-set rows have site_target: null).
+// Page-level photo slots (hero/path-card/side imagery). Two sources:
+// 1) community-set photos the user explicitly authorized for the hero and
+//    two path cards only — every other community-set photo in the pack
+//    stays unprocessed (matched by exact manifest `file`, since
+//    community-set rows have site_target: null).
+// 2) already-in-scope property/lot interior photos, for the three
+//    Buyers/HowItWorks/About side-images — these are real property photos
+//    whose galleries are generated into photosByTarget but never actually
+//    rendered anywhere in the UI (LotCarousel only shows a lot's cover, not
+//    its full gallery), so wiring one in here doesn't duplicate anything
+//    already on the site. All four real (non-rendering) exterior photos in
+//    the pack are already used as property/lot covers elsewhere, so these
+//    three are interiors by necessity, not preference.
 // Output goes to public/photos/site/ (not a per-property folder), since
 // there's no property grouping for page chrome. Alt text here is curated by
-// hand (factual, generic, no community name or ownership claim) rather than
-// derived from the manifest's alt_role, since these are reused as general
-// site imagery, not a specific listing's photos.
+// hand (factual, generic, no community/property name, address, or ownership
+// claim) rather than derived from the manifest's alt_role.
 const SLOTS = {
   heroHome: {
     file: 'whitewing-princeton/exterior-aerial-1.jpg',
@@ -79,6 +86,18 @@ const SLOTS = {
   pathBuyer: {
     file: 'whitewing-princeton/backyard-1.jpg',
     alt: 'Backyard of a brick single-story home',
+  },
+  buyersHero: {
+    file: '1460-hopes-lake/living-1.jpg',
+    alt: 'Empty living room with wood-look flooring and a glass-paned back door',
+  },
+  howItWorksSide: {
+    file: '1611-outpost-way/kitchen-1.jpg',
+    alt: 'Kitchen with a white island, stainless appliances, and tile backsplash',
+  },
+  aboutSide: {
+    file: 'sabina-dr/living-1.jpg',
+    alt: 'Living room with a ceiling fan and built-in fireplace',
   },
 }
 
@@ -270,10 +289,14 @@ async function main() {
       console.error(`SLOTS["${slot}"] references "${file}", which is not in the manifest. Stopping rather than guessing.`)
       process.exit(1)
     }
-    if (!row.use.startsWith('community-set-unwired')) {
+    // A SLOTS row must be either an authorized community-set photo, or an
+    // already-in-scope property/lot photo (same acceptance rule as the
+    // main pipeline above) — never a held-pending/excluded/locally-held row.
+    if (!row.use.startsWith('community-set-unwired') && !isInScope(row)) {
       console.error(
-        `SLOTS["${slot}"] expected a community-set-unwired row but "${file}" has use="${row.use}". ` +
-          `Stopping — this doesn't match what was authorized.`
+        `SLOTS["${slot}"] references "${file}" (use="${row.use}"), which is neither an ` +
+          `authorized community-set row nor an in-scope property/lot row. Stopping — this ` +
+          `doesn't match what was authorized.`
       )
       process.exit(1)
     }
