@@ -45,7 +45,18 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero" style={{ backgroundImage: `url(${images.heroHome})` }}>
+      <section className="hero">
+        <img
+          className="hero-img"
+          src={images.heroHome.src960}
+          srcSet={`${images.heroHome.src480} 480w, ${images.heroHome.src960} 960w`}
+          sizes="100vw"
+          width={images.heroHome.w}
+          height={images.heroHome.h}
+          alt={images.heroHome.alt}
+          loading="eager"
+          fetchpriority="high"
+        />
         <div className="hero-content">
           <span className="eyebrow fade-up">Faith-aligned homeownership</span>
           <h1 className="fade-up d1">
@@ -131,11 +142,17 @@ export default function Home() {
           </Reveal>
           <div className="grid-2">
             <Reveal>
-              <Link
-                to="/investors"
-                className="path-card invest"
-                style={{ backgroundImage: `url(${images.pathInvestor})` }}
-              >
+              <Link to="/investors" className="path-card invest">
+                <img
+                  className="path-card-img"
+                  src={images.pathInvestor.src960}
+                  srcSet={`${images.pathInvestor.src480} 480w, ${images.pathInvestor.src960} 960w`}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  width={images.pathInvestor.w}
+                  height={images.pathInvestor.h}
+                  alt={images.pathInvestor.alt}
+                  loading="lazy"
+                />
                 <div className="path-card-body">
                   <span className="eyebrow invest">For investors</span>
                   <h3>Put capital to work, without lending at interest</h3>
@@ -149,11 +166,17 @@ export default function Home() {
               </Link>
             </Reveal>
             <Reveal>
-              <Link
-                to="/buyers"
-                className="path-card buyer"
-                style={{ backgroundImage: `url(${images.pathBuyer})` }}
-              >
+              <Link to="/buyers" className="path-card buyer">
+                <img
+                  className="path-card-img"
+                  src={images.pathBuyer.src960}
+                  srcSet={`${images.pathBuyer.src480} 480w, ${images.pathBuyer.src960} 960w`}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  width={images.pathBuyer.w}
+                  height={images.pathBuyer.h}
+                  alt={images.pathBuyer.alt}
+                  loading="lazy"
+                />
                 <div className="path-card-body">
                   <span className="eyebrow buyer">For home buyers</span>
                   <h3>Close but short? There’s a path.</h3>
