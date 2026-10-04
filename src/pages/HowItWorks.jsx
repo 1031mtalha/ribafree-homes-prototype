@@ -56,7 +56,15 @@ export default function HowItWorks() {
             </Reveal>
             <Reveal>
               <div className="side-image" style={{ height: 380 }}>
-                <img src={images.howItWorksSide} alt="Home under construction" loading="lazy" />
+                <img
+                  src={images.howItWorksSide.src960}
+                  srcSet={`${images.howItWorksSide.src480} 480w, ${images.howItWorksSide.src960} 960w, ${images.howItWorksSide.srcNative} ${images.howItWorksSide.w}w`}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  width={images.howItWorksSide.w}
+                  height={images.howItWorksSide.h}
+                  alt={images.howItWorksSide.alt}
+                  loading="lazy"
+                />
               </div>
             </Reveal>
           </div>

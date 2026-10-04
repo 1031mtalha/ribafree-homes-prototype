@@ -1,5 +1,3 @@
-import { images } from '../config/images'
-
 const statusClass = {
   Planned: 'status-planned',
   'In Progress': 'status-in-progress',
@@ -9,7 +7,7 @@ const statusClass = {
 export default function ProjectCard({ project }) {
   return (
     <article className="project-card">
-      <img src={images[project.imageKey]} alt={project.name} loading="lazy" />
+      <div className="photo-placeholder project-card-photo">Photo</div>
       <div className="project-card-body">
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <span className={`badge ${statusClass[project.status] ?? ''}`}>

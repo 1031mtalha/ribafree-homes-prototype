@@ -55,7 +55,15 @@ export default function Buyers() {
           <div className="grid-2" style={{ alignItems: 'center', gap: 56 }}>
             <Reveal>
               <div className="side-image" style={{ height: 420 }}>
-                <img src={images.buyersHero} alt="Family home" loading="lazy" />
+                <img
+                  src={images.buyersHero.src960}
+                  srcSet={`${images.buyersHero.src480} 480w, ${images.buyersHero.src960} 960w, ${images.buyersHero.srcNative} ${images.buyersHero.w}w`}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  width={images.buyersHero.w}
+                  height={images.buyersHero.h}
+                  alt={images.buyersHero.alt}
+                  loading="lazy"
+                />
               </div>
             </Reveal>
             <Reveal>
