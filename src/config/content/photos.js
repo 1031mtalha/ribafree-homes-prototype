@@ -4,7 +4,9 @@
 // committed). Each top-level key in photosByTarget is a site_target id
 // matching an id in src/config/content/portfolio.js (heldProperties or
 // lots). sitePhotos holds page-chrome slots (hero/path cards), keyed to
-// the SLOTS config above and consumed by src/config/images.js.
+// the SLOTS config above and consumed by src/config/images.js. Each slot
+// entry has src480/src960 (standard tiers) plus srcNative (the source's
+// own width, never upscaled — 1244 for the current three sources).
 
 export const photosByTarget = {
   "wc1-hopes-lake": {
@@ -443,24 +445,27 @@ export const sitePhotos = {
   "heroHome": {
     "src480": "/photos/site/heroHome-480.webp",
     "src960": "/photos/site/heroHome-960.webp",
-    "w": 960,
-    "h": 540,
+    "srcNative": "/photos/site/heroHome-1244.webp",
+    "w": 1244,
+    "h": 700,
     "alt": "Brick two-story home with landscaped yard, aerial view",
     "kind": "photo"
   },
   "pathInvestor": {
     "src480": "/photos/site/pathInvestor-480.webp",
     "src960": "/photos/site/pathInvestor-960.webp",
-    "w": 960,
-    "h": 540,
+    "srcNative": "/photos/site/pathInvestor-1244.webp",
+    "w": 1244,
+    "h": 700,
     "alt": "Aerial view of a residential community with a pool",
     "kind": "photo"
   },
   "pathBuyer": {
     "src480": "/photos/site/pathBuyer-480.webp",
     "src960": "/photos/site/pathBuyer-960.webp",
-    "w": 960,
-    "h": 540,
+    "srcNative": "/photos/site/pathBuyer-1244.webp",
+    "w": 1244,
+    "h": 700,
     "alt": "Backyard of a brick single-story home",
     "kind": "photo"
   }

@@ -48,8 +48,8 @@ export default function Home() {
       <section className="hero">
         <img
           className="hero-img"
-          src={images.heroHome.src960}
-          srcSet={`${images.heroHome.src480} 480w, ${images.heroHome.src960} 960w`}
+          src={images.heroHome.srcNative}
+          srcSet={`${images.heroHome.src480} 480w, ${images.heroHome.src960} 960w, ${images.heroHome.srcNative} ${images.heroHome.w}w`}
           sizes="100vw"
           width={images.heroHome.w}
           height={images.heroHome.h}
@@ -146,7 +146,7 @@ export default function Home() {
                 <img
                   className="path-card-img"
                   src={images.pathInvestor.src960}
-                  srcSet={`${images.pathInvestor.src480} 480w, ${images.pathInvestor.src960} 960w`}
+                  srcSet={`${images.pathInvestor.src480} 480w, ${images.pathInvestor.src960} 960w, ${images.pathInvestor.srcNative} ${images.pathInvestor.w}w`}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   width={images.pathInvestor.w}
                   height={images.pathInvestor.h}
@@ -170,7 +170,7 @@ export default function Home() {
                 <img
                   className="path-card-img"
                   src={images.pathBuyer.src960}
-                  srcSet={`${images.pathBuyer.src480} 480w, ${images.pathBuyer.src960} 960w`}
+                  srcSet={`${images.pathBuyer.src480} 480w, ${images.pathBuyer.src960} 960w, ${images.pathBuyer.srcNative} ${images.pathBuyer.w}w`}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   width={images.pathBuyer.w}
                   height={images.pathBuyer.h}

@@ -106,18 +106,26 @@ function toImageRef(p) {
 // auto-rotate, strip metadata, write each in-range width as WebP, stepping
 // quality down only as far as needed to stay under MAX_BYTES, and asserting
 // no EXIF survived. Returns { refs, bytesWritten, filesWritten }.
-async function processWidths(srcPath, outDir, baseName, sourceWidth, publicDir) {
+// `widths` defaults to the standard WIDTHS tiers (property/lot pipeline);
+// the site-slot pipeline passes its own list (WIDTHS plus the source's own
+// native width) without touching this default, so existing property/lot
+// output is unaffected.
+async function processWidths(srcPath, outDir, baseName, sourceWidth, publicDir, widths = WIDTHS) {
   const refs = {}
   let bytesWritten = 0
   let filesWritten = 0
 
-  for (const width of WIDTHS) {
+  for (const width of widths) {
     // Preserve the original property-pipeline behavior exactly: 480/960 are
     // always attempted (withoutEnlargement caps pixels for narrower sources,
     // it never upscales), only the 1280 tier is skipped outright when the
     // source isn't wide enough. For the 1244px-wide site-slot sources this
     // already means no 1280 file is written — satisfying "never upscale,
-    // no 1920 variant" — without changing behavior for existing photos.
+    // no 1920 variant" — without changing behavior for existing photos. Any
+    // width beyond the standard 480/960/1280 tiers (e.g. a slot's own native
+    // width) is only ever passed in when it's already <= sourceWidth, so it
+    // needs no extra skip condition — withoutEnlargement is still the hard
+    // backstop against upscaling either way.
     if (width === 1280 && sourceWidth < 1280) continue
 
     const outName = `${baseName}-${width}.webp`
@@ -276,13 +284,21 @@ async function main() {
       process.exit(1)
     }
 
-    const { refs, bytesWritten, filesWritten } = await processWidths(srcPath, siteOutDir, slot, row.width, 'site')
-    const r960 = refs[960] ?? refs[480]
+    // Slots additionally get a native-width tier (here, 1244 — the source's
+    // own width) on top of the standard 480/960/1280 tiers, so the hero
+    // isn't stuck upscaling its largest available file at wide viewports.
+    // withoutEnlargement inside processWidths is still the hard backstop:
+    // this can never exceed sourceWidth, so it's never an upscale.
+    const slotWidths = [...new Set([...WIDTHS, row.width])].sort((a, b) => a - b)
+    const { refs, bytesWritten, filesWritten } = await processWidths(srcPath, siteOutDir, slot, row.width, 'site', slotWidths)
+    const largestWidth = Math.max(...Object.keys(refs).map(Number))
+    const rLargest = refs[largestWidth]
     sitePhotos[slot] = {
       src480: refs[480]?.publicPath,
-      src960: r960?.publicPath,
-      w: r960.w,
-      h: r960.h,
+      src960: refs[960]?.publicPath,
+      srcNative: refs[row.width]?.publicPath,
+      w: rLargest.w,
+      h: rLargest.h,
       alt,
       kind: row.kind,
     }
@@ -302,7 +318,9 @@ async function main() {
     '// committed). Each top-level key in photosByTarget is a site_target id\n' +
     '// matching an id in src/config/content/portfolio.js (heldProperties or\n' +
     '// lots). sitePhotos holds page-chrome slots (hero/path cards), keyed to\n' +
-    '// the SLOTS config above and consumed by src/config/images.js.\n\n'
+    '// the SLOTS config above and consumed by src/config/images.js. Each slot\n' +
+    '// entry has src480/src960 (standard tiers) plus srcNative (the source\'s\n' +
+    '// own width, never upscaled — 1244 for the current three sources).\n\n'
   const body =
     `export const photosByTarget = ${JSON.stringify(dataOut, null, 2)}\n\n` +
     `export const sitePhotos = ${JSON.stringify(sitePhotos, null, 2)}\n`
@@ -324,7 +342,7 @@ async function main() {
     }
   }
   for (const entry of Object.values(sitePhotos)) {
-    for (const key of ['src480', 'src960']) {
+    for (const key of ['src480', 'src960', 'srcNative']) {
       const publicRelative = entry[key]
       if (!publicRelative) continue
       const abs = path.join(REPO_ROOT, 'public', publicRelative.replace(/^\//, ''))
