@@ -70,6 +70,10 @@ function toImageRef(p) {
   return {
     src480: p.refs[480]?.publicPath,
     src960: r960?.publicPath,
+    // src1280 only exists when the source was wide enough (see WIDTHS loop
+    // below) — used as the lightbox/"view larger" image when available,
+    // falling back to src960 otherwise.
+    ...(p.refs[1280] ? { src1280: p.refs[1280].publicPath } : {}),
     w: r960.w,
     h: r960.h,
     alt: p.alt,
@@ -219,7 +223,7 @@ async function main() {
   for (const entry of Object.values(dataOut)) {
     const allRefs = [entry.cover, ...entry.gallery, ...entry.floorPlans].filter(Boolean)
     for (const ref of allRefs) {
-      for (const key of ['src480', 'src960']) {
+      for (const key of ['src480', 'src960', 'src1280']) {
         const publicRelative = ref[key]
         if (!publicRelative) continue
         const abs = path.join(REPO_ROOT, 'public', publicRelative.replace(/^\//, ''))

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Lightbox from './Lightbox'
 
 const statusClass = {
   Rented: 'invest',
@@ -7,6 +8,7 @@ const statusClass = {
 export default function PropertyCard({ property }) {
   const photos = property.photos ?? []
   const [active, setActive] = useState(0)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
   const current = photos[active]
 
   return (
@@ -14,7 +16,7 @@ export default function PropertyCard({ property }) {
       {current ? (
         <>
           <img
-            className="project-card-photo"
+            className="project-card-photo photo-zoomable"
             src={current.src960}
             srcSet={`${current.src480} 480w, ${current.src960} 960w`}
             sizes="(max-width: 640px) 100vw, 380px"
@@ -22,6 +24,7 @@ export default function PropertyCard({ property }) {
             height={current.h}
             alt={current.alt}
             loading="lazy"
+            onClick={() => setLightboxIndex(active)}
           />
           {photos.length > 1 && (
             <div className="property-thumbs" role="group" aria-label={`${property.title} photos`}>
@@ -79,6 +82,23 @@ export default function PropertyCard({ property }) {
           </p>
         )}
       </div>
+
+      {lightboxIndex !== null && (
+        <Lightbox
+          image={photos[lightboxIndex]}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={photos.length > 1 ? () => {
+            const next = (lightboxIndex - 1 + photos.length) % photos.length
+            setLightboxIndex(next)
+            setActive(next)
+          } : undefined}
+          onNext={photos.length > 1 ? () => {
+            const next = (lightboxIndex + 1) % photos.length
+            setLightboxIndex(next)
+            setActive(next)
+          } : undefined}
+        />
+      )}
     </article>
   )
 }

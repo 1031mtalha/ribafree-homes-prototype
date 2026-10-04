@@ -124,6 +124,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/1611-outpost-way/floorplan-1-480.webp",
         "src960": "/photos/1611-outpost-way/floorplan-1-960.webp",
+        "src1280": "/photos/1611-outpost-way/floorplan-1-1280.webp",
         "w": 960,
         "h": 902,
         "alt": "Floor plan, 1611 Outpost Way",
@@ -153,6 +154,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/arbor-dr/living-1-480.webp",
         "src960": "/photos/arbor-dr/living-1-960.webp",
+        "src1280": "/photos/arbor-dr/living-1-1280.webp",
         "w": 960,
         "h": 720,
         "alt": "Living area, Arbor Dr",
@@ -161,6 +163,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/arbor-dr/kitchen-1-480.webp",
         "src960": "/photos/arbor-dr/kitchen-1-960.webp",
+        "src1280": "/photos/arbor-dr/kitchen-1-1280.webp",
         "w": 960,
         "h": 720,
         "alt": "Kitchen, Arbor Dr",
@@ -169,6 +172,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/arbor-dr/kitchen-2-480.webp",
         "src960": "/photos/arbor-dr/kitchen-2-960.webp",
+        "src1280": "/photos/arbor-dr/kitchen-2-1280.webp",
         "w": 960,
         "h": 720,
         "alt": "Kitchen, Arbor Dr",
@@ -177,6 +181,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/arbor-dr/bedroom-1-480.webp",
         "src960": "/photos/arbor-dr/bedroom-1-960.webp",
+        "src1280": "/photos/arbor-dr/bedroom-1-1280.webp",
         "w": 960,
         "h": 720,
         "alt": "Bedroom, Arbor Dr",
@@ -209,6 +214,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/arbor-dr/utility-2-480.webp",
         "src960": "/photos/arbor-dr/utility-2-960.webp",
+        "src1280": "/photos/arbor-dr/utility-2-1280.webp",
         "w": 960,
         "h": 720,
         "alt": "Interior detail, Arbor Dr",
@@ -225,6 +231,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/arbor-dr/backyard-1-480.webp",
         "src960": "/photos/arbor-dr/backyard-1-960.webp",
+        "src1280": "/photos/arbor-dr/backyard-1-1280.webp",
         "w": 960,
         "h": 720,
         "alt": "Backyard, Arbor Dr",
@@ -263,6 +270,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/morning-ridge-aspen/living-1-480.webp",
         "src960": "/photos/morning-ridge-aspen/living-1-960.webp",
+        "src1280": "/photos/morning-ridge-aspen/living-1-1280.webp",
         "w": 960,
         "h": 540,
         "alt": "Living area, Aspen (Elevation A)",
@@ -271,6 +279,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/morning-ridge-aspen/kitchen-1-480.webp",
         "src960": "/photos/morning-ridge-aspen/kitchen-1-960.webp",
+        "src1280": "/photos/morning-ridge-aspen/kitchen-1-1280.webp",
         "w": 960,
         "h": 540,
         "alt": "Kitchen, Aspen (Elevation A)",
@@ -398,6 +407,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/sabina-dr/floorplan-1-480.webp",
         "src960": "/photos/sabina-dr/floorplan-1-960.webp",
+        "src1280": "/photos/sabina-dr/floorplan-1-1280.webp",
         "w": 960,
         "h": 1276,
         "alt": "Floor plan, Sabina Dr",
@@ -418,6 +428,7 @@ export const photosByTarget = {
     "cover": {
       "src480": "/photos/wildrose-way/rendering-exterior-1-480.webp",
       "src960": "/photos/wildrose-way/rendering-exterior-1-960.webp",
+      "src1280": "/photos/wildrose-way/rendering-exterior-1-1280.webp",
       "w": 960,
       "h": 540,
       "alt": "Exterior rendering, WildRose Way",
@@ -427,6 +438,7 @@ export const photosByTarget = {
       {
         "src480": "/photos/wildrose-way/rendering-exterior-1-480.webp",
         "src960": "/photos/wildrose-way/rendering-exterior-1-960.webp",
+        "src1280": "/photos/wildrose-way/rendering-exterior-1-1280.webp",
         "w": 960,
         "h": 540,
         "alt": "Exterior rendering, WildRose Way",
