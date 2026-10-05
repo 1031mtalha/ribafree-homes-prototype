@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import { images } from '../config/images'
 
 const links = [
+  { to: '/', label: 'Home', end: true },
   { to: '/how-it-works', label: 'How It Works' },
   { to: '/investors', label: 'For Investors' },
   { to: '/buyers', label: 'For Buyers' },
@@ -42,6 +43,7 @@ export default function Nav() {
           <li key={l.to}>
             <NavLink
               to={l.to}
+              end={l.end}
               onClick={() => setOpen(false)}
               className={({ isActive }) => (isActive ? 'active' : '')}
             >
